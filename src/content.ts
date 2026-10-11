@@ -5,7 +5,6 @@ export type Project = {
   name: string;
   category: Localized;
   summary: Localized;
-  image: string;
   live: string;
   repo: string;
   stack: string[];
@@ -23,7 +22,6 @@ export const projects: Project[] = [
       en: "From finding the right space to choosing dates and completing a booking.",
       ru: "От поиска подходящего пространства до выбора дат и оформления бронирования.",
     },
-    image: "stayline-screen.webp",
     live: "https://shevdevworks.github.io/stayline/",
     repo: "https://github.com/shevdevworks/stayline",
     stack: ["React", "TypeScript", "Vite"],
@@ -46,7 +44,7 @@ export const projects: Project[] = [
       },
     ],
     scope: {
-      en: "Independent frontend case study. Venue data and booking responses are simulated; no real reservations are made.",
+      en: "Personal frontend case study. Venue data and booking responses are simulated; no real reservations are made.",
       ru: "Личный frontend-проект. Данные площадок и ответы бронирования имитируются; реальные бронирования не создаются.",
     },
   },
@@ -56,9 +54,8 @@ export const projects: Project[] = [
     category: { en: "Creative web app", ru: "Творческое веб-приложение" },
     summary: {
       en: "A phrase becomes a typographic poster you can edit, save, share and download.",
-      ru: "Фраза превращается в типографический постер: редактируй, сохраняй, делись и скачивай.",
+      ru: "Фраза превращается в типографический постер, который можно редактировать, сохранять, скачивать и отправлять.",
     },
-    image: "emquad-screen.webp",
     live: "https://emquad.vercel.app/",
     repo: "https://github.com/shevdevworks/emquad",
     stack: ["Next.js", "TypeScript", "Postgres"],
@@ -81,7 +78,7 @@ export const projects: Project[] = [
       },
     ],
     scope: {
-      en: "Independent product project with a database-backed saving flow. Built as an exploration of typography and web engineering.",
+      en: "Personal product project with a database-backed saving flow. Built as an exploration of typography and web engineering.",
       ru: "Личный продуктовый проект с сохранением в базу данных. Исследование типографики и веб-разработки.",
     },
   },
@@ -93,10 +90,9 @@ export const projects: Project[] = [
       en: "A product catalog with useful filters, a persistent cart and a guided checkout.",
       ru: "Каталог с фильтрами, сохраняемой корзиной и понятным оформлением заказа.",
     },
-    image: "cyber-gear-screen.webp",
     live: "https://shevdevworks.github.io/cyber-gear/",
     repo: "https://github.com/shevdevworks/cyber-gear",
-    stack: ["JavaScript", "CSS", "State management"],
+    stack: ["JavaScript", "HTML", "CSS"],
     brief: {
       en: "Build the shopping flow for a peripherals store: find a product, compare options, manage a cart and enter delivery details.",
       ru: "Построить сценарий покупки в магазине периферии: найти товар, сравнить варианты, собрать корзину и указать доставку.",
@@ -128,7 +124,6 @@ export const projects: Project[] = [
       en: "An animated product story with an interactive calculator to explore pricing.",
       ru: "Анимированная презентация продукта с интерактивным калькулятором тарифов.",
     },
-    image: "apex-screen.webp",
     live: "https://shevdevworks.github.io/apex-saas/",
     repo: "https://github.com/shevdevworks/apex-saas",
     stack: ["HTML / CSS", "JavaScript", "GSAP"],
@@ -163,7 +158,6 @@ export const projects: Project[] = [
       en: "Sales data becomes readable through linked charts, filters and exportable reports.",
       ru: "Данные продаж становятся понятнее благодаря связанным графикам, фильтрам и экспорту отчётов.",
     },
-    image: "trendify-screen.webp",
     live: "https://shevdevworks.github.io/trendify/",
     repo: "https://github.com/shevdevworks/trendify",
     stack: ["JavaScript", "SVG charts", "CSS"],
@@ -200,7 +194,6 @@ export const content = {
     closeMenu: "Close menu",
     skip: "Skip to content",
     status: "Open to freelance projects",
-    location: "Independent frontend developer / Kyiv, Ukraine",
     stamp: "Design → Development",
     name: "Ivan",
     role: "Frontend developer",
@@ -211,25 +204,21 @@ export const content = {
       "I’m Ivan, the developer behind ShevDevWorks. I turn designs and ideas into websites and web interfaces that feel right, on every screen.",
     viewWork: "Explore my work",
     discuss: "Tell me about your project",
-    heroNote: "Landing pages, React apps and the details in between.",
-    preview: "Explore a project",
     previewNote: "A closer look at what I build",
     projectSelect: "Choose a project to preview",
     openCase: "Explore this project",
     techNote: "Tools I work with",
     workTitle: "Proof in the details.",
     workIntro:
-      "Booking flows, storefronts and creative tools. Five independent projects, built to be explored.",
+      "Booking flows, storefronts and creative tools. Five personal projects, built to be explored.",
     selectedWork: "Selected work",
     scroll: "Scroll to explore",
-    desktop: "Desktop experience",
     mobile: "Made for every screen",
     serviceLink: "See a related project",
     serviceIntro: "From the first page to the final interaction.",
     detailLabel: "Explore the case study",
     workCount: "05 projects",
     serviceCaption: "A few ways I can help",
-    aboutStatement: "The small things\nmake the experience.",
     aboutLabel: "The person behind the work",
     aboutPrinciples: [
       "Care in the details",
@@ -242,13 +231,12 @@ export const content = {
     case: "View project details",
     live: "Live demo",
     code: "Source code",
-    caseLabel: "Independent project",
+    caseLabel: "Personal project",
     closeCase: "Close project details",
     brief: "The challenge",
     implementation: "What I built",
     scope: "Project scope",
     similar: "Have a similar project?",
-    servicesTitle: "What do you need built?",
     servicesIntro:
       "A new website, a more useful interface, or a hand with something already in progress.",
     services: [
@@ -266,7 +254,7 @@ export const content = {
       },
       {
         title: "E-commerce frontends",
-        text: "Product catalogs, shopping carts and checkout interfaces. Integration scope agreed around your platform.",
+        text: "Product catalogs, shopping carts and checkout interfaces. Integration scope depends on your platform.",
         tags: "Catalogs · Cart flows · Checkout UI",
         icon: "bag",
       },
@@ -301,9 +289,9 @@ export const content = {
     ],
     contactTitle: "What are you\nworking on?",
     contactText:
-      "Send a design, a brief or just the idea. I’ll help you work out the scope and a sensible next step.",
+      "Send a design, a brief or just an idea. I’ll help you work out the scope and a sensible next step.",
     emailLabel: "Email me",
-    telegramLabel: "Message on Telegram",
+    telegramLabel: "Message me on Telegram",
     copy: "Copy email address",
     copied: "Email copied",
     copyFailed: "Copy unavailable. Use the email link.",
@@ -323,10 +311,9 @@ export const content = {
     formNote:
       "Opens your email app with these details. Nothing is sent automatically.",
     draftReady:
-      "Your email draft is ready. If your email app didn’t open, use the email link on the left.",
+      "Your email draft is ready. If your email app didn’t open, copy the address and write to me directly.",
     footer: "Frontend development, thoughtfully done.",
     backTop: "Back to top",
-    noResults: "No projects in this category.",
   },
   ru: {
     nav: ["Проекты", "Услуги", "Обо мне"],
@@ -334,8 +321,7 @@ export const content = {
     menu: "Открыть меню",
     closeMenu: "Закрыть меню",
     skip: "Перейти к содержимому",
-    status: "Открыт к фриланс-проектам",
-    location: "Независимый frontend-разработчик / Киев, Украина",
+    status: "Открыт для новых проектов",
     stamp: "Дизайн → Разработка",
     name: "Иван",
     role: "Frontend-разработчик",
@@ -343,28 +329,24 @@ export const content = {
     independent: "Фриланс",
     headline: ["Ваша идея.", "Готовый продукт."],
     intro:
-      "Я Иван, разработчик за ShevDevWorks. Превращаю дизайн и идеи в сайты и веб-интерфейсы, которыми удобно пользоваться на любом экране.",
+      "Я Иван, работаю под именем ShevDevWorks. Превращаю дизайн и идеи в сайты и веб-интерфейсы, которыми удобно пользоваться на любом экране.",
     viewWork: "Посмотреть работы",
     discuss: "Рассказать о проекте",
-    heroNote: "Лендинги, React-приложения и всё, что делает их удобными.",
-    preview: "Посмотреть проект",
-    previewNote: "Ближе к тому, что я создаю",
+    previewNote: "Мои проекты вблизи",
     projectSelect: "Выберите проект для просмотра",
     openCase: "Подробнее о проекте",
     techNote: "Мои инструменты",
     workTitle: "Качество — в деталях.",
     workIntro:
-      "Бронирование, магазины и творческие инструменты. Пять личных проектов, которые можно изучить в деле.",
+      "Бронирование, магазины и творческие инструменты. Пять личных проектов, которые можно попробовать вживую.",
     selectedWork: "Избранные работы",
     scroll: "Листайте дальше",
-    desktop: "Версия для компьютера",
     mobile: "Удобно на любом экране",
     serviceLink: "Посмотреть похожий проект",
-    serviceIntro: "От первой страницы до последнего взаимодействия.",
+    serviceIntro: "От первой страницы до последней детали.",
     detailLabel: "Подробнее о работе",
     workCount: "05 проектов",
     serviceCaption: "Чем я могу помочь",
-    aboutStatement: "Детали создают\nвпечатление.",
     aboutLabel: "Кто стоит за проектами",
     aboutPrinciples: [
       "Внимание к деталям",
@@ -372,7 +354,7 @@ export const content = {
       "Код с заделом на развитие",
     ],
     contactEyebrow: "Есть идея?",
-    contactHint: "Давайте найдём ей место в интернете.",
+    contactHint: "Давайте найдём вашей идее место в интернете.",
     filters: ["Все работы", "Веб-приложения", "Сайты"],
     case: "Подробнее о проекте",
     live: "Открыть демо",
@@ -381,15 +363,14 @@ export const content = {
     closeCase: "Закрыть описание проекта",
     brief: "Задача",
     implementation: "Что я реализовал",
-    scope: "Границы проекта",
+    scope: "Рамки проекта",
     similar: "Нужен похожий проект?",
-    servicesTitle: "Что нужно разработать?",
     servicesIntro:
       "Новый сайт, удобный интерфейс или помощь с проектом, который уже в работе.",
     services: [
       {
         title: "Сайты и лендинги",
-        text: "Адаптивные сайты бизнеса и посадочные страницы по вашему дизайну или на основе вашего контента.",
+        text: "Адаптивные сайты для бизнеса и посадочные страницы по вашему дизайну или на основе вашего контента.",
         tags: "HTML / CSS · React · GSAP",
         icon: "window",
       },
@@ -407,16 +388,16 @@ export const content = {
       },
       {
         title: "Доработки и исправления",
-        text: "Проблемы мобильной верстки, незаконченные функции, неудобные сценарии или аккуратное обновление дизайна.",
+        text: "Проблемы мобильной вёрстки, незаконченные функции, неудобные сценарии или аккуратное обновление дизайна.",
         tags: "Адаптивность · Доработки UI · Анимация",
         icon: "adjust",
       },
     ],
     aboutTitle: "Один разработчик.\nПрямое общение.",
     aboutText:
-      "ShevDevWorks — мой независимый бренд. Вы общаетесь со мной напрямую: от разбора задачи до проверки готового интерфейса.",
+      "ShevDevWorks — имя, под которым я работаю как независимый разработчик. Вы общаетесь со мной напрямую: от разбора задачи до проверки готового интерфейса.",
     aboutText2:
-      "Мне важны детали, которые замечает пользователь: читаемая верстка, понятная обратная связь и предсказуемое поведение. Код держу организованным, чтобы следующие изменения было проще внести.",
+      "Мне важны детали, которые замечает пользователь: читаемая вёрстка, понятная обратная связь и предсказуемое поведение. Код держу в порядке, чтобы следующие изменения было проще внести.",
     aboutLink: "Посмотреть мой GitHub",
     aboutSmall: "В Киеве. Работаю удалённо.",
     processTitle: "От вашей задачи до готового сайта.",
@@ -427,7 +408,7 @@ export const content = {
       },
       {
         title: "Разрабатываю и показываю",
-        text: "Собираю интерфейс и делюсь прогрессом, чтобы вы могли проверить направление до финальной сдачи.",
+        text: "Собираю интерфейс и показываю промежуточные результаты, чтобы вы могли проверить направление до финальной сдачи.",
       },
       {
         title: "Проверяем и передаём",
@@ -440,8 +421,8 @@ export const content = {
     emailLabel: "Написать на почту",
     telegramLabel: "Написать в Telegram",
     copy: "Скопировать адрес почты",
-    copied: "Почта скопирована",
-    copyFailed: "Копирование недоступно. Нажмите ссылку почты.",
+    copied: "Адрес скопирован",
+    copyFailed: "Копирование недоступно. Нажмите на адрес почты.",
     briefTitle: "Начнём с пары деталей",
     serviceLabel: "Что вам нужно?",
     serviceOptions: [
@@ -458,9 +439,8 @@ export const content = {
     formNote:
       "Откроет почтовое приложение с этими данными. Автоматической отправки нет.",
     draftReady:
-      "Черновик готов. Если почтовое приложение не открылось, воспользуйтесь ссылкой почты слева.",
+      "Черновик готов. Если почтовое приложение не открылось, скопируйте адрес и напишите мне напрямую.",
     footer: "Frontend-разработка с вниманием к деталям.",
     backTop: "Наверх",
-    noResults: "В этой категории пока нет проектов.",
   },
 };

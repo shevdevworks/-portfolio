@@ -20,6 +20,12 @@ export function usePageMotion(reduced: boolean) {
     const hero = document.querySelector<HTMLElement>(".hero");
     const stage = document.querySelector<HTMLElement>(".showcase-stage");
     const progress = document.querySelector<HTMLElement>(".reading-progress");
+    const navLinks = [
+      ...document.querySelectorAll<HTMLAnchorElement>(".desktop-nav a"),
+    ];
+    const navSections = navLinks.map((link) =>
+      document.querySelector<HTMLElement>(link.getAttribute("href") ?? ""),
+    );
     let frame = 0;
     const update = () => {
       frame = 0;
@@ -39,6 +45,13 @@ export function usePageMotion(reduced: boolean) {
       document
         .querySelector(".header")
         ?.classList.toggle("is-scrolled", scrollY > 28);
+      const marker = window.innerHeight * 0.35;
+      navLinks.forEach((link, i) => {
+        const rect = navSections[i]?.getBoundingClientRect();
+        if (rect && rect.top <= marker && rect.bottom > marker)
+          link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      });
     };
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update);
@@ -117,28 +130,11 @@ export function usePageMotion(reduced: boolean) {
         .forEach((el) => observer?.observe(el));
     } else stage?.style.setProperty("--scroll", "0");
 
-    const sections = document.querySelectorAll("section[id]");
-    const sectionObserver = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          document.querySelectorAll(".desktop-nav a").forEach((link) => {
-            const active = link.getAttribute("href") === `#${entry.target.id}`;
-            if (active) link.setAttribute("aria-current", "location");
-            else link.removeAttribute("aria-current");
-          });
-        }
-      },
-      { rootMargin: "-15% 0px -65% 0px" },
-    );
-    sections.forEach((section) => sectionObserver.observe(section));
-
     return () => {
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
       cancelAnimationFrame(frame);
       observer?.disconnect();
-      sectionObserver.disconnect();
       animations.forEach((animation) => animation.cancel());
     };
   }, [reduced]);

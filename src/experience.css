@@ -21,6 +21,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 110px;
+  scrollbar-gutter: stable;
 }
 body {
   margin: 0;
@@ -411,7 +412,7 @@ h1 {
   align-items: center;
   gap: 12px;
   margin-top: 15px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   width: max-content;
   color: var(--muted);
@@ -725,7 +726,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 9px;
+  font-size: 10px;
   color: #b7b0c9;
 }
 .stage-bottom > a {
@@ -785,7 +786,7 @@ h1 {
   gap: 7px;
   background: transparent;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
   border: 1px solid transparent;
   border-radius: 20px;
   padding: 8px 12px;
@@ -1122,11 +1123,6 @@ h1 {
   opacity: 1;
   transform: translate(0);
 }
-.project-category {
-  font-size: 11px;
-  color: var(--muted);
-  text-align: right;
-}
 .project-details > p {
   font-size: 13px;
   line-height: 1.85;
@@ -1141,7 +1137,7 @@ h1 {
   margin-top: 17px;
 }
 .project-stack > span {
-  font-size: 10px;
+  font-size: 11px;
   color: #697183;
 }
 .project-stack > span + span {
@@ -1294,7 +1290,7 @@ h1 {
 }
 .service-tools {
   display: block;
-  font-size: 10px;
+  font-size: 11px;
   margin-top: 14px;
   color: var(--muted);
 }
@@ -1342,7 +1338,7 @@ h1 {
 }
 .service-preview-link small {
   display: block;
-  font-size: 10px;
+  font-size: 11px;
   opacity: 0.8;
 }
 .service-preview-link strong {
@@ -1494,7 +1490,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 10px;
+  font-size: 11px;
   color: #726b82;
 }
 .signature-mark {
@@ -1633,7 +1629,7 @@ h1 {
 }
 .email-contact small {
   display: block;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0;
   color: #b7abc9;
   margin-bottom: 6px;
@@ -1674,14 +1670,14 @@ h1 {
 .copy-status {
   display: block;
   min-height: 20px;
-  font-size: 10px;
+  font-size: 11px;
   color: #d0c5e0;
   margin-top: 10px;
 }
 .availability-light {
   margin-top: 11px;
   color: #d6cee1;
-  font-size: 10px;
+  font-size: 11px;
 }
 .availability-light > span {
   background: #a9c7b4;
@@ -1745,7 +1741,7 @@ h1 {
   margin-top: 22px;
 }
 .form-note {
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.8;
   color: var(--muted);
   margin-top: 14px;
@@ -1800,7 +1796,7 @@ h1 {
 }
 .footer p,
 .footer > span {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--muted);
 }
 
@@ -2026,7 +2022,7 @@ html[lang="ru"] .service h3 button {
   font-size: 19px;
 }
 html[lang="ru"] .project-switch button {
-  font-size: 10px;
+  font-size: 11px;
 }
 @media (min-width: 1600px) {
   .hero {
@@ -2080,7 +2076,7 @@ html[lang="ru"] .project-switch button {
     min-width: 210px;
   }
   .showcase-info > span {
-    font-size: 10px;
+    font-size: 11px;
   }
   .project-switch button {
     padding-inline: 10px;
@@ -2170,7 +2166,7 @@ html[lang="ru"] .project-switch button {
   }
   .hero-intro .button {
     padding-left: 17px;
-    font-size: 10px;
+    font-size: 11px;
     gap: 10px;
   }
   .button-icon {
@@ -2178,7 +2174,7 @@ html[lang="ru"] .project-switch button {
     height: 34px;
   }
   .hero-work-link {
-    font-size: 10px;
+    font-size: 12px;
   }
   .showcase-stage {
     height: 460px;
@@ -2252,7 +2248,7 @@ html[lang="ru"] .project-switch button {
     font-size: 24px;
   }
   .project-visual-label > span {
-    font-size: 9px;
+    font-size: 10px;
     max-width: 110px;
   }
   .project-browser {
@@ -2269,9 +2265,6 @@ html[lang="ru"] .project-switch button {
   }
   .project-featured .project-title-row {
     gap: 15px;
-  }
-  .project-category {
-    font-size: 10px;
   }
   .project-details > p {
     font-size: 12px;
@@ -2319,7 +2312,7 @@ html[lang="ru"] .project-switch button {
   }
   .identity-bottom {
     margin-top: 22px;
-    font-size: 8px;
+    font-size: 9px;
   }
   .about-copy > p {
     font-size: 13px;
@@ -2388,16 +2381,16 @@ html[lang="ru"] .project-switch button {
   }
   .hero-work-link {
     margin-top: 10px;
-    font-size: 10px;
+    font-size: 12px;
   }
   .hero-topline {
     gap: 15px;
   }
   .intro-mask {
-    font-size: 10px;
+    font-size: 11px;
   }
   .availability {
-    font-size: 10px;
+    font-size: 11px;
   }
   .hero-intro .button-icon {
     width: 34px;
@@ -2499,10 +2492,6 @@ html[lang="ru"] .project-switch button {
     gap: 10px;
     align-items: flex-start;
   }
-  .project-category {
-    font-size: 9px;
-    max-width: 110px;
-  }
   .project h3 {
     font-size: 25px;
   }
@@ -2525,7 +2514,7 @@ html[lang="ru"] .project-switch button {
     gap: 10px;
   }
   .project-stack > span {
-    font-size: 9px;
+    font-size: 11px;
   }
   .project-stack > span + span {
     padding-left: 10px;
@@ -2536,9 +2525,6 @@ html[lang="ru"] .project-switch button {
   .project-featured .project-title-row {
     flex-direction: column;
     gap: 6px;
-  }
-  .project-featured .project-category {
-    max-width: none;
   }
   .project-featured .project-stack {
     margin-top: 12px;
@@ -2560,7 +2546,7 @@ html[lang="ru"] .project-switch button {
     padding: 23px;
   }
   .service-preview-label {
-    font-size: 10px;
+    font-size: 11px;
     margin-bottom: 23px;
   }
   .service-preview-link {
@@ -2570,7 +2556,7 @@ html[lang="ru"] .project-switch button {
     font-size: 24px;
   }
   .service-preview-link small {
-    font-size: 9px;
+    font-size: 11px;
   }
   .service-expander > div {
     padding-left: 0;
@@ -2612,14 +2598,14 @@ html[lang="ru"] .project-switch button {
     margin-top: 27px;
   }
   .identity-role {
-    font-size: 9px;
+    font-size: 10px;
   }
   .identity-bottom {
-    font-size: 7px;
+    font-size: 9px;
     margin-top: 20px;
   }
   .about-signature {
-    font-size: 9px;
+    font-size: 11px;
     bottom: 23px;
     left: 23px;
     right: 23px;
@@ -2671,7 +2657,7 @@ html[lang="ru"] .project-switch button {
     font-size: 21px;
   }
   .brief-form label {
-    font-size: 10px;
+    font-size: 11px;
   }
   .brief-form select,
   .brief-form textarea {
@@ -2683,10 +2669,10 @@ html[lang="ru"] .project-switch button {
     gap: 15px;
   }
   .form-note {
-    font-size: 9px;
+    font-size: 11px;
   }
   .contact-bottom {
-    font-size: 10px;
+    font-size: 11px;
   }
   .footer {
     flex-wrap: wrap;
@@ -2696,10 +2682,10 @@ html[lang="ru"] .project-switch button {
     font-size: 18px;
   }
   .footer p {
-    font-size: 9px;
+    font-size: 11px;
   }
   .footer > span {
-    font-size: 9px;
+    font-size: 11px;
   }
   html[lang="ru"] h1 {
     font-size: 78px;
@@ -2735,7 +2721,7 @@ html[lang="ru"] .project-switch button {
     display: none;
   }
   .language-switch {
-    font-size: 10px;
+    font-size: 11px;
   }
   .language-switch button {
     min-width: 31px;
@@ -2812,13 +2798,13 @@ html[lang="ru"] .project-switch button {
     margin-bottom: 26px;
   }
   .intro-mask {
-    font-size: 10px;
+    font-size: 11px;
   }
   .intro-mask > span {
     gap: 9px;
   }
   .availability {
-    font-size: 10px;
+    font-size: 11px;
   }
   .hero-topline .availability {
     order: -1;
@@ -2856,9 +2842,8 @@ html[lang="ru"] .project-switch button {
     height: 34px;
   }
   .hero-work-link {
-    display: inline-flex;
-    margin: 0 0 0 19px;
-    font-size: 10px;
+    margin: 14px 0 0;
+    font-size: 12px;
     gap: 7px;
   }
   .hero-work-link > svg {
@@ -2872,7 +2857,7 @@ html[lang="ru"] .project-switch button {
     top: 19px;
     left: 20px;
     right: 20px;
-    font-size: 8px;
+    font-size: 10px;
   }
   .stage-top > span:first-child {
     gap: 7px;
@@ -2940,7 +2925,7 @@ html[lang="ru"] .project-switch button {
   .stage-detail {
     left: 7%;
     bottom: 0;
-    font-size: 7px;
+    font-size: 9px;
     gap: 6px;
     max-width: 65%;
   }
@@ -2951,7 +2936,7 @@ html[lang="ru"] .project-switch button {
     left: 20px;
     right: 20px;
     bottom: 16px;
-    font-size: 7px;
+    font-size: 10px;
   }
   .stage-bottom > span:first-child {
     display: none;
@@ -2970,14 +2955,14 @@ html[lang="ru"] .project-switch button {
     border-radius: 9px;
   }
   .stage-project-note > span {
-    font-size: 8px;
+    font-size: 9px;
   }
   .stage-project-note > strong {
     font-size: 23px;
     margin-top: 4px;
   }
   .stage-project-note > div {
-    font-size: 8px;
+    font-size: 9px;
     margin-top: 8px;
   }
   .stage-open {
@@ -2995,17 +2980,16 @@ html[lang="ru"] .project-switch button {
     font-size: 17px;
   }
   .showcase-info > span {
-    font-size: 10px;
+    font-size: 11px;
   }
   .project-switch {
-    gap: 0;
-    justify-content: space-between;
-    flex-wrap: nowrap;
+    gap: 2px 4px;
+    justify-content: flex-start;
   }
   .project-switch button {
     padding: 7px 8px;
     gap: 5px;
-    font-size: 8px;
+    font-size: 11px;
     min-height: 44px;
   }
   .project-switch-dot {
@@ -3019,7 +3003,7 @@ html[lang="ru"] .project-switch button {
     gap: 15px;
   }
   .tool-strip > span {
-    font-size: 10px;
+    font-size: 11px;
     padding: 0;
   }
   .tool-strip > div {
@@ -3049,7 +3033,7 @@ html[lang="ru"] .project-switch button {
     padding-block: 74px;
   }
   .section-kicker {
-    font-size: 10px;
+    font-size: 11px;
     margin-bottom: 20px;
     gap: 8px;
   }
@@ -3075,7 +3059,7 @@ html[lang="ru"] .project-switch button {
   .work-filter button {
     flex: 1;
     padding: 10px;
-    font-size: 10px;
+    font-size: 11px;
     min-height: 43px;
   }
   .work-grid {
@@ -3100,7 +3084,7 @@ html[lang="ru"] .project-switch button {
   .project-visual-label > span,
   .project-featured .project-visual-label > span {
     display: block;
-    font-size: 8px;
+    font-size: 10px;
     max-width: 130px;
   }
   .project-browser,
@@ -3135,11 +3119,6 @@ html[lang="ru"] .project-switch button {
     justify-content: space-between;
     gap: 20px;
   }
-  .project-featured .project-category,
-  .project-category {
-    font-size: 9px;
-    max-width: 145px;
-  }
   .project h3 {
     font-size: 27px;
   }
@@ -3158,7 +3137,7 @@ html[lang="ru"] .project-switch button {
     gap: 14px;
   }
   .project-stack > span {
-    font-size: 9px;
+    font-size: 11px;
   }
   .project-stack > span + span {
     padding-left: 14px;
@@ -3203,7 +3182,7 @@ html[lang="ru"] .project-switch button {
     font-size: 12px;
   }
   .service-tools {
-    font-size: 9px;
+    font-size: 11px;
   }
   .service-preview {
     min-height: 0;
@@ -3217,7 +3196,7 @@ html[lang="ru"] .project-switch button {
     font-size: 28px;
   }
   .service-preview-link small {
-    font-size: 10px;
+    font-size: 11px;
   }
   .service-preview-link {
     padding-top: 25px;
@@ -3263,14 +3242,14 @@ html[lang="ru"] .project-switch button {
     margin-top: 6px;
   }
   .identity-bottom {
-    font-size: 8px;
+    font-size: 9px;
     margin-top: 23px;
   }
   .about-signature {
     left: 25px;
     right: 25px;
     bottom: 21px;
-    font-size: 9px;
+    font-size: 11px;
   }
   .about-principles {
     flex-direction: column;
@@ -3342,7 +3321,7 @@ html[lang="ru"] .project-switch button {
     font-size: 21px;
   }
   .email-contact small {
-    font-size: 10px;
+    font-size: 11px;
   }
   .email-contact {
     padding-bottom: 17px;
@@ -3356,7 +3335,7 @@ html[lang="ru"] .project-switch button {
     margin-top: 19px;
   }
   .availability-light {
-    font-size: 10px;
+    font-size: 11px;
     margin-top: 10px;
   }
   .brief-form {
@@ -3379,12 +3358,12 @@ html[lang="ru"] .project-switch button {
     min-height: 52px;
   }
   .form-note {
-    font-size: 10px;
+    font-size: 11px;
   }
   .contact-bottom {
     margin-top: 40px;
     padding-block: 22px;
-    font-size: 10px;
+    font-size: 11px;
   }
   .contact-bottom > span {
     max-width: 245px;
@@ -3402,11 +3381,11 @@ html[lang="ru"] .project-switch button {
     margin-bottom: 3px;
   }
   .footer p {
-    font-size: 8px;
+    font-size: 11px;
     max-width: 190px;
   }
   .footer > span {
-    font-size: 8px;
+    font-size: 11px;
   }
   .case-dialog {
     width: calc(100vw - 20px);
@@ -3418,7 +3397,7 @@ html[lang="ru"] .project-switch button {
     gap: 13px;
   }
   .case-top > span {
-    font-size: 8px;
+    font-size: 10px;
     gap: 7px;
     flex-wrap: wrap;
   }
@@ -3440,7 +3419,7 @@ html[lang="ru"] .project-switch button {
     gap: 6px;
   }
   .tech-tags > span {
-    font-size: 9px;
+    font-size: 10px;
     padding: 4px 8px;
   }
   .case-image-wrap {
@@ -3488,12 +3467,8 @@ html[lang="ru"] .project-switch button {
   html[lang="ru"] .hero-intro .button {
     font-size: 11px;
   }
-  html[lang="ru"] .hero-work-link {
-    font-size: 10px;
-    margin-left: 17px;
-  }
   html[lang="ru"] .project-switch button {
-    font-size: 8px;
+    font-size: 11px;
   }
   html[lang="ru"] .service h3 button {
     font-size: 17px;
@@ -3519,13 +3494,11 @@ html[lang="ru"] .project-switch button {
     min-width: 29px;
   }
   .hero-intro .button {
-    font-size: 10px;
+    font-size: 11px;
     gap: 14px;
     padding-left: 15px;
   }
   .hero-work-link {
-    font-size: 9px;
-    margin-left: 10px;
     gap: 5px;
   }
   .hero-work-link svg {
@@ -3540,15 +3513,15 @@ html[lang="ru"] .project-switch button {
   .stage-top {
     left: 17px;
     right: 17px;
-    font-size: 7px;
+    font-size: 10px;
   }
   .stage-detail {
-    font-size: 6px;
+    font-size: 9px;
     bottom: -2px;
   }
   .project-switch button {
     padding-inline: 6px;
-    font-size: 7px;
+    font-size: 11px;
     gap: 4px;
   }
   .project-image-button,
@@ -3556,7 +3529,7 @@ html[lang="ru"] .project-switch button {
     height: 295px;
   }
   .project-visual-label > span {
-    font-size: 7px;
+    font-size: 10px;
     max-width: 110px;
   }
   .project-visual-label,
@@ -3564,11 +3537,6 @@ html[lang="ru"] .project-switch button {
     left: 22px;
     right: 22px;
     font-size: 23px;
-  }
-  .project-category,
-  .project-featured .project-category {
-    font-size: 8px;
-    max-width: 130px;
   }
   .service h3 button {
     font-size: 17px;
@@ -3591,7 +3559,7 @@ html[lang="ru"] .project-switch button {
     font-size: 40px;
   }
   .identity-bottom {
-    font-size: 7px;
+    font-size: 9px;
   }
   .email-contact a {
     font-size: 18px;
@@ -3606,18 +3574,33 @@ html[lang="ru"] .project-switch button {
     max-width: 210px;
   }
   html[lang="ru"] .hero-intro .button {
-    font-size: 10px;
+    font-size: 11px;
     gap: 12px;
   }
-  html[lang="ru"] .hero-work-link {
-    font-size: 9px;
-    margin-left: 10px;
-  }
   html[lang="ru"] .project-switch button {
-    font-size: 7px;
+    font-size: 11px;
   }
   html[lang="ru"] .contact-copy h2 {
     font-size: 48px;
+  }
+}
+/* Touch targets: enlarge the hit area without moving the layout. */
+@media (max-width: 800px) {
+  .hero-work-link,
+  .stage-bottom > a {
+    position: relative;
+  }
+  .hero-work-link::after,
+  .stage-bottom > a::after {
+    content: "";
+    position: absolute;
+    inset: -14px -8px;
+  }
+  .language-switch button {
+    min-height: 44px;
+  }
+  .project-switch button {
+    min-height: 44px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

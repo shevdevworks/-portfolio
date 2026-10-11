@@ -56,6 +56,22 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
       </>
     ),
     up: <path d="M12 19V5m-6 6 6-6 6 6" />,
+    open: <path d="M7 17 17 7M9 7h8v8" />,
+    atom: (
+      <>
+        <circle cx="12" cy="12" r="1.4" />
+        <ellipse cx="12" cy="12" rx="10" ry="4" />
+        <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
+        <ellipse
+          cx="12"
+          cy="12"
+          rx="10"
+          ry="4"
+          transform="rotate(120 12 12)"
+        />
+      </>
+    ),
+    bolt: <path d="M13 3 5 13h6l-1 8 8-10h-6l1-8Z" />,
   };
   return (
     <svg
@@ -70,6 +86,23 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
       aria-hidden="true"
     >
       {paths[name] || paths.arrow}
+    </svg>
+  );
+}
+
+export function Spark() {
+  return (
+    <svg
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4" />
     </svg>
   );
 }

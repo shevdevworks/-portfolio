@@ -5,7 +5,7 @@ import {
   useState,
   type FormEvent,
 } from "react";
-import { Brand, Icon } from "./components";
+import { Brand, Icon, Spark } from "./components";
 import { content, projects, type Lang, type Project } from "./content";
 import {
   pointerDepth,
@@ -25,8 +25,18 @@ const interfaceImages: Record<string, string> = {
 };
 const shot = (project: Project) => assets + interfaceImages[project.id];
 const serviceProjects = [3, 0, 2, 4];
+const toolMarks = [
+  <Icon name="atom" size={27} />,
+  "TS",
+  "JS",
+  "</>",
+  "GS",
+  <Icon name="bolt" size={24} />,
+];
 
 function initialLanguage(): Lang {
+  const fromUrl = new URLSearchParams(window.location.search).get("lang");
+  if (fromUrl === "ru" || fromUrl === "en") return fromUrl;
   try {
     return localStorage.getItem("shevdevworks-language") === "ru" ? "ru" : "en";
   } catch {
@@ -176,7 +186,7 @@ function CaseDialog({
             </a>
             <a
               className="case-contact text-link"
-              href={`mailto:${email}?subject=${encodeURIComponent(`${project.name} — ${lang === "en" ? "project enquiry" : "новый проект"}`)}`}
+              href={`mailto:${email}?subject=${encodeURIComponent(`${project.name} — ${lang === "en" ? "project inquiry" : "новый проект"}`)}`}
             >
               {c.similar}
               <Icon name="arrow" size={17} />
@@ -213,7 +223,9 @@ function Theatre({
         <div className="stage-orbit orbit-two" aria-hidden="true" />
         <div className="stage-top">
           <span>
-            <span className="stage-star">✳</span> {c.previewNote}
+            <span className="stage-star" aria-hidden="true">
+              <Spark />
+            </span> {c.previewNote}
           </span>
           <span>{c.workCount}</span>
         </div>
@@ -265,7 +277,7 @@ function Theatre({
             </div>
             <span className="stage-open">
               {c.openCase}
-              <Icon name="external" size={18} />
+              <Icon name="open" size={18} />
             </span>
           </button>
           {featured === 0 ? (
@@ -351,7 +363,7 @@ export default function Experience() {
     const description =
       lang === "en"
         ? "Independent frontend developer in Kyiv. Websites, React interfaces and e-commerce frontends, crafted with care. Explore the work and discuss your project."
-        : "Frontend-разработчик в Киеве. Сайты, React-приложения и интерфейсы магазинов с вниманием к деталям. Посмотрите работы и обсудим ваш проект.";
+        : "Frontend-разработчик в Киеве. Сайты, React-приложения и интерфейсы магазинов с вниманием к деталям. Посмотрите работы и расскажите о своём проекте.";
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute("content", description);
@@ -366,6 +378,10 @@ export default function Experience() {
     } catch {
       /* The selected language still works without storage. */
     }
+    const url = new URL(window.location.href);
+    if (lang === "ru") url.searchParams.set("lang", "ru");
+    else url.searchParams.delete("lang");
+    history.replaceState(null, "", url);
     setCopyState("idle");
     setDraftReady(false);
   }, [lang]);
@@ -383,8 +399,26 @@ export default function Experience() {
         document.getElementById("menu-toggle")?.focus();
       }
     };
+    const closeOutside = (event: PointerEvent) => {
+      if ((event.target as Element).closest(".header")) return;
+      setMenuOpen(false);
+      /* The press that dismisses the menu should not activate what is under it. */
+      const swallow = (click: MouseEvent) => {
+        click.preventDefault();
+        click.stopPropagation();
+      };
+      const release = () =>
+        setTimeout(() => document.removeEventListener("click", swallow, true));
+      document.addEventListener("click", swallow, { capture: true, once: true });
+      document.addEventListener("pointerup", release, { once: true });
+      document.addEventListener("pointercancel", release, { once: true });
+    };
     document.addEventListener("keydown", close);
-    return () => document.removeEventListener("keydown", close);
+    document.addEventListener("pointerdown", closeOutside);
+    return () => {
+      document.removeEventListener("keydown", close);
+      document.removeEventListener("pointerdown", closeOutside);
+    };
   }, [menuOpen]);
   useEffect(() => {
     if (reduced || !workGrid.current) return;
@@ -431,8 +465,8 @@ export default function Experience() {
     const body =
       lang === "en"
         ? `Hi Ivan,\n\nI’m looking for: ${serviceName}\n\n${request}\n`
-        : `Привет, Иван!\n\nМне нужно: ${serviceName}\n\n${request}\n`;
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(lang === "en" ? "Project enquiry — ShevDevWorks" : "Новый проект — ShevDevWorks")}&body=${encodeURIComponent(body)}`;
+        : `Здравствуйте, Иван!\n\nМне нужно: ${serviceName}\n\n${request}\n`;
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(lang === "en" ? "Project inquiry — ShevDevWorks" : "Новый проект — ShevDevWorks")}&body=${encodeURIComponent(body)}`;
     setDraftReady(true);
   }
 
@@ -477,7 +511,7 @@ export default function Experience() {
             <a href="#contact" className="header-contact">
               {c.talk}
               <span>
-                <Icon name="external" size={15} />
+                <Icon name="arrow" size={15} />
               </span>
             </a>
             <button
@@ -532,7 +566,7 @@ export default function Experience() {
                     {line}
                     {i === 1 && (
                       <span className="headline-spark" aria-hidden="true">
-                        ✳
+                        <Spark />
                       </span>
                     )}
                   </span>
@@ -544,7 +578,7 @@ export default function Experience() {
               <a className="button button-primary" href="#contact">
                 <span>{c.discuss}</span>
                 <span className="button-icon">
-                  <Icon name="external" size={20} />
+                  <Icon name="arrow" size={20} />
                 </span>
               </a>
               <a className="hero-work-link" href="#work">
@@ -574,7 +608,7 @@ export default function Experience() {
             ].map((tool, i) => (
               <span key={tool}>
                 <span className="tool-mark" aria-hidden="true">
-                  {["⚛", "TS", "JS", "⌘", "〰", "ϟ"][i]}
+                  {toolMarks[i]}
                 </span>
                 {tool}
               </span>
@@ -618,7 +652,7 @@ export default function Experience() {
           >
             {shownProjects.map((p, i) => (
               <article
-                className={`project project-${p.id} ${filter === 0 && i === 0 ? "project-featured" : ""}`}
+                className={`project project-${p.id} ${(filter === 0 && i === 0) || shownProjects.length === 1 ? "project-featured" : ""}`}
                 key={p.id}
               >
                 <button
@@ -652,7 +686,7 @@ export default function Experience() {
                   )}
                   <span className="image-open">
                     <span>{c.detailLabel}</span>
-                    <Icon name="external" size={20} />
+                    <Icon name="open" size={20} />
                   </span>
                 </button>
                 <div className="project-details">
@@ -660,10 +694,9 @@ export default function Experience() {
                     <h3>
                       <button onClick={() => setSelected(p)}>
                         {p.name}
-                        <Icon name="external" size={22} />
+                        <Icon name="open" size={22} />
                       </button>
                     </h3>
-                    <span className="project-category">{p.category[lang]}</span>
                   </div>
                   <p>{p.summary[lang]}</p>
                   <div className="project-stack">
@@ -756,7 +789,7 @@ export default function Experience() {
                       <small>{c.serviceLink}</small>
                       <strong>{serviceProject.name}</strong>
                     </span>
-                    <Icon name="external" size={25} />
+                    <Icon name="open" size={25} />
                   </button>
                 </div>
               </div>
@@ -899,7 +932,7 @@ export default function Experience() {
                 {c.status}
               </span>
             </div>
-            <form className="brief-form" onSubmit={prepareDraft}>
+            <form className="brief-form" onSubmit={prepareDraft} noValidate>
               <h3>{c.briefTitle}</h3>
               <label htmlFor="service">{c.serviceLabel}</label>
               <select
@@ -921,7 +954,7 @@ export default function Experience() {
                 id="message"
                 name="message"
                 rows={5}
-                required
+                aria-required="true"
                 maxLength={1200}
                 value={briefMessage}
                 onChange={(event) => setBriefMessage(event.target.value)}
@@ -931,7 +964,7 @@ export default function Experience() {
               <button className="button button-primary" type="submit">
                 <span>{c.send}</span>
                 <span className="button-icon">
-                  <Icon name="external" size={20} />
+                  <Icon name="mail" size={20} />
                 </span>
               </button>
               <p className="form-note">{c.formNote}</p>
