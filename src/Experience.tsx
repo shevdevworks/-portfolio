@@ -476,7 +476,7 @@ export default function Experience() {
         {c.skip}
       </a>
       <div className="reading-progress" aria-hidden="true" />
-      <header className="header" id="top">
+      <header className="header">
         <div className="container header-inner">
           <Brand />
           <nav
