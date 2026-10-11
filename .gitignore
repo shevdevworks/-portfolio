@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.local
+
+# local notes and tooling
+AGENTS.md
+NOTES.md
+.playwright-mcp/
+
+# QA captures
+preview-*.png
+motion-preview.webm
