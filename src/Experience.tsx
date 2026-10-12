@@ -5,6 +5,7 @@ import {
   useState,
   type MouseEvent as ReactMouseEvent,
 } from "react";
+import { flushSync } from "react-dom";
 import { Brand, BrandSymbol, Icon } from "./components";
 import { BotIllustration } from "./BotIllustration";
 import { content, languages, projects, type Lang, type Project } from "./content";
@@ -56,6 +57,14 @@ function initialLanguage(): Lang {
   } catch {
     return "en";
   }
+}
+
+type Theme = "light" | "dark";
+const themeColors: Record<Theme, string> = { light: "#f7f8fa", dark: "#0f0e15" };
+
+/* index.html applies a saved theme before the first paint; light is the default. */
+function initialTheme(): Theme {
+  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 }
 
 function CaseDialog({
@@ -340,6 +349,7 @@ function Theatre({
 
 export default function Experience() {
   const [lang, setLang] = useState<Lang>(initialLanguage);
+  const [theme, setTheme] = useState<Theme>(initialTheme);
   const [menuOpen, setMenuOpen] = useState(false);
   const [featured, setFeatured] = useState(0);
   const [filter, setFilter] = useState(0);
@@ -357,7 +367,15 @@ export default function Experience() {
   const c = content[lang];
   const contactBody = `${c.mailGreeting}\n\n${c.mailNeed} ${c.serviceOptions[briefService]}\n\n${briefMessage.trim()}\n`;
   const emailDraftUrl = `mailto:${email}?subject=${encodeURIComponent(c.mailSubject)}&body=${encodeURIComponent(contactBody)}`;
-  const telegramDraftUrl = `https://t.me/shevdevworks?text=${encodeURIComponent(contactBody)}`;
+  /* The control is named after the theme it switches to. */
+  const nextThemeLabel = theme === "dark" ? c.themeLight : c.themeDark;
+  const themeIcon = (
+    <span className="theme-icon">
+      <Icon name="moon" size={18} />
+      <Icon name="sun" size={18} />
+    </span>
+  );
+  const telegramDraftUrl =`https://t.me/shevdevworks?text=${encodeURIComponent(contactBody)}`;
   const shownProjects = projects.filter(
     (p) => filter === 0 || p.group === [null, "apps", "websites", "bots"][filter],
   );
@@ -400,6 +418,17 @@ export default function Experience() {
     setCopyState("idle");
     setContactChannel(null);
   }, [lang]);
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", themeColors[theme]);
+    try {
+      localStorage.setItem("shevdevworks-theme", theme);
+    } catch {
+      /* The selected theme still works without storage. */
+    }
+  }, [theme]);
   useEffect(
     () => () => {
       if (copyTimer.current) clearTimeout(copyTimer.current);
@@ -457,6 +486,42 @@ export default function Experience() {
     if (copyTimer.current) clearTimeout(copyTimer.current);
     copyTimer.current = setTimeout(() => setCopyState("idle"), 4000);
   }
+  function toggleTheme(event: ReactMouseEvent<HTMLButtonElement>) {
+    const next: Theme = theme === "dark" ? "light" : "dark";
+    const apply = () => {
+      document.documentElement.dataset.theme = next;
+      flushSync(() => setTheme(next));
+    };
+    if (reduced || !("startViewTransition" in document)) return apply();
+    /* The new palette opens as a circle from the control that was pressed. */
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const radius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y),
+    );
+    document
+      .startViewTransition(apply)
+      .ready.then(() =>
+        document.documentElement.animate(
+          {
+            clipPath: [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${radius}px at ${x}px ${y}px)`,
+            ],
+          },
+          {
+            duration: 700,
+            easing: "cubic-bezier(.16,1,.3,1)",
+            pseudoElement: "::view-transition-new(root)",
+          },
+        ),
+      )
+      .catch(() => {
+        /* The theme is already applied if the transition is skipped. */
+      });
+  }
   function prepareContact(event: ReactMouseEvent<HTMLAnchorElement>, channel: "email" | "telegram") {
     const request = briefMessage.trim();
     const input = event.currentTarget.closest("form")!.elements.namedItem("message") as HTMLTextAreaElement;
@@ -490,21 +555,31 @@ export default function Experience() {
             ))}
           </nav>
           <div className="header-actions">
-            <div
-              className="language-switch"
-              role="group"
-              aria-label={c.languageLabel}
-            >
-              {languages.map((l) => (
-                <button
-                  key={l}
-                  lang={l}
-                  aria-pressed={lang === l}
-                  onClick={() => setLang(l)}
-                >
-                  {languageLabels[l]}
-                </button>
-              ))}
+            <div className="header-tools">
+              <div
+                className="language-switch"
+                role="group"
+                aria-label={c.languageLabel}
+              >
+                {languages.map((l) => (
+                  <button
+                    key={l}
+                    lang={l}
+                    aria-pressed={lang === l}
+                    onClick={() => setLang(l)}
+                  >
+                    {languageLabels[l]}
+                  </button>
+                ))}
+              </div>
+              <button
+                className="theme-toggle"
+                aria-label={nextThemeLabel}
+                title={nextThemeLabel}
+                onClick={toggleTheme}
+              >
+                {themeIcon}
+              </button>
             </div>
             <a href="#contact" className="header-contact">
               {c.talk}
@@ -537,6 +612,10 @@ export default function Experience() {
               <Icon name="arrow" size={20} />
             </a>
           ))}
+          <button className="mobile-theme" onClick={toggleTheme}>
+            {nextThemeLabel}
+            {themeIcon}
+          </button>
         </nav>
       </header>
       <main id="main" tabIndex={-1}>
@@ -824,9 +903,7 @@ export default function Experience() {
             </div>
             <div className="about-signature">
               <span>{content.en.aboutSmall}</span>
-              <span className="signature-mark" aria-hidden="true">
-                S.
-              </span>
+              <BrandSymbol className="signature-mark" />
             </div>
           </div>
           <div className="about-principles">

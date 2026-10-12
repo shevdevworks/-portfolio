@@ -36,6 +36,17 @@
       crossorigin
     />
     <title>ShevDevWorks — Your idea. Beautifully built.</title>
+    <script>
+      /* Apply a saved dark theme before the first paint, so the page never flashes light. */
+      try {
+        if (localStorage.getItem("shevdevworks-theme") === "dark") {
+          document.documentElement.dataset.theme = "dark";
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute("content", "#0f0e15");
+        }
+      } catch {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

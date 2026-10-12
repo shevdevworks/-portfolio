@@ -72,6 +72,13 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
       </>
     ),
     bolt: <path d="M13 3 5 13h6l-1 8 8-10h-6l1-8Z" />,
+    sun: (
+      <>
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" />
+      </>
+    ),
+    moon: <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.2 8.2 0 1 0 10.2 10.2Z" />,
   };
   return (
     <svg

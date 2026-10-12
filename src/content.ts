@@ -458,6 +458,8 @@ export const content = {
     "navLabel": "Main navigation",
     "mobileNavLabel": "Mobile navigation",
     "languageLabel": "Language",
+    "themeDark": "Dark theme",
+    "themeLight": "Light theme",
     "filterLabel": "Filter solutions",
     "nav": [
       "Solutions",
@@ -611,6 +613,8 @@ export const content = {
     "navLabel": "Основная навигация",
     "mobileNavLabel": "Мобильная навигация",
     "languageLabel": "Язык",
+    "themeDark": "Тёмная тема",
+    "themeLight": "Светлая тема",
     "filterLabel": "Фильтр решений",
     "nav": [
       "Решения",
@@ -764,6 +768,8 @@ export const content = {
     "navLabel": "Основна навігація",
     "mobileNavLabel": "Мобільна навігація",
     "languageLabel": "Мова",
+    "themeDark": "Темна тема",
+    "themeLight": "Світла тема",
     "filterLabel": "Фільтр рішень",
     "nav": [
       "Рішення",

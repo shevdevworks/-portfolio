@@ -13,7 +13,7 @@
 .case-example-note p { margin-top: 6px; max-width: 740px; }
 .case-example-note .tech-tags { margin-top: 13px; }
 .work-filter { flex-shrink: 0; }
-.surface-telegram { background: #dceaf0; color: #214454; }
+.surface-telegram { background: var(--tile-telegram); color: var(--tile-telegram-ink); }
 .project-telegram .project-image-button { height: 590px; }
 .project-telegram .project-browser {
   top: 88px;
@@ -46,17 +46,17 @@
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0;
-  color: #244454;
+  color: var(--bot-ink);
   text-align: left;
 }
 .bot-chat {
   width: 100%;
   max-width: 370px;
   margin-inline: auto;
-  border: 1px solid #ffffff;
+  border: 1px solid var(--bot-edge);
   border-radius: 17px;
   overflow: hidden;
-  background: #eef4f6;
+  background: var(--bot-chat);
   box-shadow: 0 18px 40px #2144541c;
 }
 .bot-chat-header {
@@ -64,7 +64,7 @@
   gap: 11px;
   align-items: center;
   padding: 15px;
-  background: #fff;
+  background: var(--bot-panel);
 }
 .bot-avatar {
   width: 42px;
@@ -76,28 +76,28 @@
   border-radius: 50%;
 }
 .bot-chat-header strong { display: block; font-size: 14px; font-weight: 600; }
-.bot-chat-header small { display: block; color: #667d88; font-size: 11px; margin-top: 2px; }
+.bot-chat-header small { display: block; color: var(--bot-sub); font-size: 11px; margin-top: 2px; }
 .bot-menu { margin-left: auto; font-size: 24px; }
 .bot-conversation { display: grid; gap: 11px; padding: 18px 14px; }
-.bot-bubble { background: #fff; padding: 10px 12px; border-radius: 10px 10px 10px 2px; max-width: 94%; }
-.bot-bubble-out { justify-self: end; background: #d4e8e0; border-radius: 10px 10px 2px 10px; }
-.bot-bubble small { display: block; text-align: right; font-size: 9px; margin-top: 4px; color: #526f64; }
+.bot-bubble { background: var(--bot-panel); padding: 10px 12px; border-radius: 10px 10px 10px 2px; max-width: 94%; }
+.bot-bubble-out { justify-self: end; background: var(--bot-out); border-radius: 10px 10px 2px 10px; }
+.bot-bubble small { display: block; text-align: right; font-size: 9px; margin-top: 4px; color: var(--bot-time); }
 .bot-choices { display: grid; gap: 5px; margin-top: 10px; }
-.bot-choices span { display: block; border-radius: 5px; background: #edf4f7; padding: 7px 9px; text-align: center; color: #306982; font-size: 11px; }
+.bot-choices span { display: block; border-radius: 5px; background: var(--bot-choice); padding: 7px 9px; text-align: center; color: var(--bot-link); font-size: 11px; }
 .bot-confirmation { display: flex; align-items: flex-start; gap: 7px; }
-.bot-confirmation svg { margin-top: 2px; color: #398064; }
-.bot-input { padding: 12px 17px; display: flex; justify-content: space-between; background: white; color: #6c818b; font-size: 12px; }
+.bot-confirmation svg { margin-top: 2px; color: var(--bot-ok); }
+.bot-input { padding: 12px 17px; display: flex; justify-content: space-between; background: var(--bot-panel); color: var(--bot-input-ink); font-size: 12px; }
 .bot-delivery { position: relative; }
-.bot-route { display: flex; align-items: center; color: #55869c; margin-bottom: 16px; }
+.bot-route { display: flex; align-items: center; color: var(--bot-route); margin-bottom: 16px; }
 .bot-route > span { width: 55px; height: 1px; background: currentColor; }
 .bot-route svg { margin-left: -7px; }
-.bot-notification { padding: 24px; border-radius: 14px; background: #fff; box-shadow: 0 14px 35px #21445412; }
-.bot-notification-label { display: flex; gap: 7px; align-items: center; font-size: 11px; color: #607986; }
-.bot-status-dot { width: 6px; height: 6px; background: #45866d; border-radius: 50%; }
+.bot-notification { padding: 24px; border-radius: 14px; background: var(--bot-panel); box-shadow: 0 14px 35px #21445412; }
+.bot-notification-label { display: flex; gap: 7px; align-items: center; font-size: 11px; color: var(--bot-label); }
+.bot-status-dot { width: 6px; height: 6px; background: var(--bot-dot); border-radius: 50%; }
 .bot-notification > strong { display: block; font-size: 23px; font-weight: 500; letter-spacing: -0.045em; margin-top: 17px; }
 .bot-notification p { margin-top: 7px; font-size: 12px; }
-.bot-notification-action { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid #e4edf0; padding-top: 15px; margin-top: 20px; font-size: 12px; color: #306982; }
-.bot-flow-note { display: block; font-size: 14px; white-space: pre-line; line-height: 1.7; margin: 25px 4px 0; color: #4c7182; }
+.bot-notification-action { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--bot-rule); padding-top: 15px; margin-top: 20px; font-size: 12px; color: var(--bot-link); }
+.bot-flow-note { display: block; font-size: 14px; white-space: pre-line; line-height: 1.7; margin: 25px 4px 0; color: var(--bot-note); }
 .case-image-wrap.surface-telegram { padding: 26px 6%; }
 .service-preview.surface-telegram .service-preview-screen { transform: none; box-shadow: none; border: 0; overflow: visible; }
 .service-preview.surface-telegram .bot-illustration { display: block; padding: 0 5px 18px; }
