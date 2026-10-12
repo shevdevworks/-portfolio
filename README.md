@@ -2,6 +2,8 @@
 
 Portfolio site of Ivan, a frontend developer based in Kyiv. It shows five personal projects (Stayline, Emquad, CyberGear, ApexSaaS, Trendify) and is available in English and Russian.
 
+**Live:** [shevdevworks.com](https://shevdevworks.com/)
+
 ## Stack
 
 - React 19, TypeScript, Vite
