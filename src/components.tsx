@@ -111,7 +111,7 @@ export function Brand({ footer = false }: { footer?: boolean }) {
     >
       <BrandSymbol className="brand-symbol" />
       <span>
-        ShevDevWorks<span className="brand-dot">.</span>
+        ShevDevWorks{!footer && <span className="brand-dot">.</span>}
       </span>
     </a>
   );

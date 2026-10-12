@@ -405,7 +405,7 @@ export const content = {
       "Your idea.",
       "Beautifully built."
     ],
-    "intro": "I’m Ivan, the developer behind ShevDevWorks. I build websites, web tools and Telegram bots that help customers take action and teams spend less time on routine tasks.",
+    "intro": "I’ll help you build websites, web tools and Telegram bots that help customers take the next step and your team spend less time on routine tasks. With interfaces that feel right on every screen.",
     "viewWork": "Find your solution",
     "discuss": "Tell me about your project",
     "previewNote": "Examples of what I can build for you",
@@ -426,7 +426,7 @@ export const content = {
     "aboutPrinciples": [
       "Care in the details",
       "Clear communication",
-      "Code you can build on"
+      "Ease of use"
     ],
     "contactEyebrow": "Have something in mind?",
     "contactHint": "Let’s build something useful for your business.",
@@ -487,7 +487,7 @@ export const content = {
     "steps": [
       {
         "title": "Get the scope right",
-        "text": "We go through your goals, designs and requirements, then agree on deliverables and a timeline."
+        "text": "We go through your goals, designs and requirements, then agree on scope, price, deliverables and a timeline."
       },
       {
         "title": "Build & keep you involved",
@@ -519,9 +519,10 @@ export const content = {
     ],
     "messageLabel": "A little about the project",
     "placeholder": "What are you building? Add a link to a design or an existing site, if you have one.",
-    "send": "Open email draft",
-    "formNote": "Opens your email app with these details. Nothing is sent automatically.",
-    "draftReady": "Your email draft is ready. If your email app didn’t open, copy the address and write to me directly.",
+    "sendTelegram": "Send via Telegram",
+    "sendEmail": "Send via email",
+    "telegramReady": "Confirm sending in Telegram. If the text wasn’t filled in, copy it from this form.",
+    "emailReady": "Confirm sending in your email app. If it didn’t open, use the email address on this page.",
     "footer": "Websites, web tools & Telegram bots.",
     "backTop": "Back to top",
     "illustration": "Illustrative workflow",
@@ -547,7 +548,7 @@ export const content = {
       "Ваша идея.",
       "Готовый продукт."
     ],
-    "intro": "Я Иван, работаю под именем ShevDevWorks. Создаю сайты, веб-инструменты и Telegram-ботов, которые помогают клиентам сделать нужный шаг, а команде — тратить меньше времени на рутину.",
+    "intro": "Помогу создать сайты, веб-инструменты и Telegram-ботов, которые помогают клиентам сделать нужный шаг, а команде — тратить меньше времени на рутину. С удобным интерфейсом на любом экране.",
     "viewWork": "Подобрать решение",
     "discuss": "Рассказать о проекте",
     "previewNote": "Примеры решений для ваших задач",
@@ -568,7 +569,7 @@ export const content = {
     "aboutPrinciples": [
       "Внимание к деталям",
       "Понятное общение",
-      "Код с заделом на развитие"
+      "Удобство для пользователя"
     ],
     "contactEyebrow": "Есть идея?",
     "contactHint": "Создадим полезный инструмент для вашего бизнеса.",
@@ -629,7 +630,7 @@ export const content = {
     "steps": [
       {
         "title": "Разбираемся с задачей",
-        "text": "Обсуждаем цели, дизайн и требования. Согласовываем объём работы, результат и сроки."
+        "text": "Обсуждаем цели, дизайн и требования. Согласовываем объём работы, стоимость, результат и сроки."
       },
       {
         "title": "Разрабатываю и показываю",
@@ -661,9 +662,10 @@ export const content = {
     ],
     "messageLabel": "Немного о проекте",
     "placeholder": "Что нужно разработать? Если есть дизайн или действующий сайт, добавьте ссылку.",
-    "send": "Открыть черновик письма",
-    "formNote": "Откроет почтовое приложение с этими данными. Автоматической отправки нет.",
-    "draftReady": "Черновик готов. Если почтовое приложение не открылось, скопируйте адрес и напишите мне напрямую.",
+    "sendTelegram": "Отправить в Telegram",
+    "sendEmail": "Отправить на почту",
+    "telegramReady": "Подтвердите отправку в Telegram. Если текст не подставился, скопируйте его из формы.",
+    "emailReady": "Подтвердите отправку в почтовом приложении. Если оно не открылось, напишите на адрес, указанный на странице.",
     "footer": "Сайты, веб-инструменты и Telegram-боты.",
     "backTop": "Наверх",
     "illustration": "Пример сценария",

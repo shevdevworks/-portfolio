@@ -3,7 +3,7 @@ import {
   useEffect,
   useRef,
   useState,
-  type FormEvent,
+  type MouseEvent as ReactMouseEvent,
 } from "react";
 import { Brand, BrandSymbol, Icon } from "./components";
 import { BotIllustration } from "./BotIllustration";
@@ -342,13 +342,18 @@ export default function Experience() {
   const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">(
     "idle",
   );
-  const [draftReady, setDraftReady] = useState(false);
+  const [contactChannel, setContactChannel] = useState<"email" | "telegram" | null>(null);
   const [briefMessage, setBriefMessage] = useState("");
   const [briefService, setBriefService] = useState(0);
   const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const workGrid = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const c = content[lang];
+  const contactBody = lang === "en"
+    ? `Hi Ivan,\n\nI’m looking for: ${c.serviceOptions[briefService]}\n\n${briefMessage.trim()}\n`
+    : `Здравствуйте, Иван!\n\nМне нужно: ${c.serviceOptions[briefService]}\n\n${briefMessage.trim()}\n`;
+  const emailDraftUrl = `mailto:${email}?subject=${encodeURIComponent(lang === "en" ? "Project inquiry — ShevDevWorks" : "Новый проект — ShevDevWorks")}&body=${encodeURIComponent(contactBody)}`;
+  const telegramDraftUrl = `https://t.me/shevdevworks?text=${encodeURIComponent(contactBody)}`;
   const shownProjects = projects.filter(
     (p) => filter === 0 || p.group === [null, "apps", "websites", "bots"][filter],
   );
@@ -358,7 +363,7 @@ export default function Experience() {
   const requestEnquiry = (enquiry: number) => {
     setSelected(null);
     setBriefService(enquiry);
-    setDraftReady(false);
+    setContactChannel(null);
     requestAnimationFrame(() => {
       document.getElementById("contact")?.scrollIntoView({ behavior: reduced ? "instant" : "smooth" });
       document.getElementById("message")?.focus({ preventScroll: true });
@@ -395,7 +400,7 @@ export default function Experience() {
     else url.searchParams.delete("lang");
     history.replaceState(null, "", url);
     setCopyState("idle");
-    setDraftReady(false);
+    setContactChannel(null);
   }, [lang]);
   useEffect(
     () => () => {
@@ -454,13 +459,9 @@ export default function Experience() {
     if (copyTimer.current) clearTimeout(copyTimer.current);
     copyTimer.current = setTimeout(() => setCopyState("idle"), 4000);
   }
-  function prepareDraft(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const request = String(data.get("message") || "").trim();
-    const input = event.currentTarget.elements.namedItem(
-      "message",
-    ) as HTMLTextAreaElement;
+  function prepareContact(event: ReactMouseEvent<HTMLAnchorElement>, channel: "email" | "telegram") {
+    const request = briefMessage.trim();
+    const input = event.currentTarget.closest("form")!.elements.namedItem("message") as HTMLTextAreaElement;
     input.setCustomValidity(
       request
         ? ""
@@ -469,17 +470,12 @@ export default function Experience() {
           : "Добавьте короткое описание проекта.",
     );
     if (!request) {
+      event.preventDefault();
+      setContactChannel(null);
       input.reportValidity();
       return;
     }
-    const serviceName =
-      c.serviceOptions[Number(data.get("service"))] ?? c.serviceOptions[0];
-    const body =
-      lang === "en"
-        ? `Hi Ivan,\n\nI’m looking for: ${serviceName}\n\n${request}\n`
-        : `Здравствуйте, Иван!\n\nМне нужно: ${serviceName}\n\n${request}\n`;
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(lang === "en" ? "Project inquiry — ShevDevWorks" : "Новый проект — ShevDevWorks")}&body=${encodeURIComponent(body)}`;
-    setDraftReady(true);
+    setContactChannel(channel);
   }
 
   return (
@@ -558,15 +554,8 @@ export default function Experience() {
       <main id="main" tabIndex={-1}>
         <section className="hero container" aria-labelledby="hero-title">
           <div className="hero-topline">
-            <span className="intro-mask">
-              <span data-intro>
-                {c.role}
-                <span className="small-dot" />
-                {c.city}
-              </span>
-            </span>
-            <span className="availability">
-              <span />
+            <span className="availability" data-intro>
+              <span className="status-dot" aria-hidden="true" />
               {c.status}
             </span>
           </div>
@@ -630,7 +619,7 @@ export default function Experience() {
           <div className="section-heading">
             <div>
               <span className="section-kicker">
-                <span className="small-dot" />
+                <span className="status-dot" aria-hidden="true" />
                 {c.selectedWork}
               </span>
               <h2 id="work-title">{c.workTitle}</h2>
@@ -810,7 +799,7 @@ export default function Experience() {
         >
           <div className="about-copy">
             <span className="section-kicker">
-              <span className="small-dot" />
+              <span className="status-dot" aria-hidden="true" />
               {c.aboutLabel}
             </span>
             <h2 id="about-title">{c.aboutTitle}</h2>
@@ -828,6 +817,7 @@ export default function Experience() {
           </div>
           <div
             className="about-art"
+            lang="en"
             onPointerMove={pointerDepth}
             onPointerLeave={resetDepth}
           >
@@ -835,17 +825,17 @@ export default function Experience() {
             <div className="identity-card">
               <div className="identity-card-top">
                 <Brand />
-                <span className="identity-status" />
+                <span className="status-dot" aria-hidden="true" />
               </div>
-              <span className="identity-name">{c.name}</span>
-              <span className="identity-role">{c.role}</span>
+              <span className="identity-name">{content.en.name}</span>
+              <span className="identity-role">{content.en.role}</span>
               <div className="identity-bottom">
-                <span>{c.city}</span>
-                <span>{c.independent}</span>
+                <span>{content.en.city}</span>
+                <span>{content.en.independent}</span>
               </div>
             </div>
             <div className="about-signature">
-              <span>{c.aboutSmall}</span>
+              <span>{content.en.aboutSmall}</span>
               <span className="signature-mark" aria-hidden="true">
                 S.
               </span>
@@ -891,7 +881,7 @@ export default function Experience() {
           <div className="container contact-grid">
             <div className="contact-copy">
               <span className="section-kicker">
-                <span className="small-dot" />
+                <span className="status-dot" aria-hidden="true" />
                 {c.contactEyebrow}
               </span>
               <h2 id="contact-title">{c.contactTitle}</h2>
@@ -934,20 +924,21 @@ export default function Experience() {
                 </span>
               </div>
               <span className="availability availability-light">
-                <span />
+                <span className="status-dot" aria-hidden="true" />
                 {c.status}
               </span>
             </div>
-            <form className="brief-form" onSubmit={prepareDraft} noValidate>
+            <form className="brief-form" onSubmit={(event) => event.preventDefault()} noValidate>
               <h3>{c.briefTitle}</h3>
               <label htmlFor="service">{c.serviceLabel}</label>
               <select
                 id="service"
                 name="service"
                 value={briefService}
-                onChange={(event) =>
-                  setBriefService(Number(event.target.value))
-                }
+                onChange={(event) => {
+                  setBriefService(Number(event.target.value));
+                  setContactChannel(null);
+                }}
               >
                 {c.serviceOptions.map((option, index) => (
                   <option key={index} value={index}>
@@ -963,20 +954,26 @@ export default function Experience() {
                 aria-required="true"
                 maxLength={1200}
                 value={briefMessage}
-                onChange={(event) => setBriefMessage(event.target.value)}
+                onChange={(event) => {
+                  setBriefMessage(event.target.value);
+                  setContactChannel(null);
+                }}
                 placeholder={c.placeholder}
                 onInput={(event) => event.currentTarget.setCustomValidity("")}
               />
-              <button className="button button-primary" type="submit">
-                <span>{c.send}</span>
-                <span className="button-icon">
-                  <Icon name="mail" size={20} />
-                </span>
-              </button>
-              <p className="form-note">{c.formNote}</p>
-              {draftReady && (
+              <div className="contact-send-actions">
+                <a className="button button-primary" href={telegramDraftUrl} target="_blank" rel="noopener noreferrer" onClick={(event) => prepareContact(event, "telegram")}>
+                  <span>{c.sendTelegram}</span>
+                  <span className="button-icon"><Icon name="telegram" size={20} /></span>
+                </a>
+                <a className="button contact-send-email" href={emailDraftUrl} onClick={(event) => prepareContact(event, "email")}>
+                  <span>{c.sendEmail}</span>
+                  <span className="button-icon"><Icon name="mail" size={20} /></span>
+                </a>
+              </div>
+              {contactChannel && (
                 <p className="draft-status" role="status">
-                  {c.draftReady}
+                  {contactChannel === "telegram" ? c.telegramReady : c.emailReady}
                 </p>
               )}
             </form>

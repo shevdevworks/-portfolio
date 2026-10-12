@@ -325,6 +325,34 @@ h2 {
   background: #698c74;
   box-shadow: 0 0 0 4px #e7ede8;
 }
+.status-dot,
+.availability > .status-dot {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #24965b;
+  box-shadow: 0 0 0 4px #24965b14;
+  animation: status-pulse 2s ease-in-out infinite;
+}
+@keyframes status-pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 0 4px #24965b20;
+  }
+  50% {
+    opacity: 0.45;
+    box-shadow: 0 0 0 7px #24965b00;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-dot,
+  .availability > .status-dot {
+    animation: none;
+  }
+}
 /* A size container, so narrow layouts can fit the headline and its mark on one line. */
 .hero-lead {
   container-type: inline-size;
@@ -1472,12 +1500,6 @@ h1 {
   width: 18px;
   height: 21px;
 }
-.identity-status {
-  width: 6px;
-  height: 6px;
-  background: #c1d4c5;
-  border-radius: 50%;
-}
 .identity-name {
   display: block;
   font-family: Space, Manrope, sans-serif;
@@ -1756,7 +1778,22 @@ h1 {
 }
 .brief-form .button {
   width: 100%;
+}
+.contact-send-actions {
+  display: grid;
+  gap: 10px;
   margin-top: 22px;
+}
+.contact-send-email {
+  border: 1px solid #d7d2e7;
+  color: var(--ink);
+  background: transparent;
+}
+.contact-send-email:hover {
+  background: #eeebf7;
+}
+.contact-send-email .button-icon {
+  background: #e9e5f5;
 }
 .form-note {
   font-size: 11px;
