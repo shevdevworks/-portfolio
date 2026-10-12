@@ -7,7 +7,7 @@ import {
 } from "react";
 import { Brand, BrandSymbol, Icon } from "./components";
 import { BotIllustration } from "./BotIllustration";
-import { content, projects, type Lang, type Project } from "./content";
+import { content, languages, projects, type Lang, type Project } from "./content";
 import {
   pointerDepth,
   resetDepth,
@@ -42,11 +42,17 @@ const toolkit = [
   { name: "Vite", icon: "bolt" },
 ];
 
+/* The switch shows UA, while the language code stays the standard "uk". */
+const languageLabels: Record<Lang, string> = { en: "EN", ru: "RU", uk: "UA" };
+const isLang = (value: string | null): value is Lang =>
+  languages.includes(value as Lang);
+
 function initialLanguage(): Lang {
   const fromUrl = new URLSearchParams(window.location.search).get("lang");
-  if (fromUrl === "ru" || fromUrl === "en") return fromUrl;
+  if (isLang(fromUrl)) return fromUrl;
   try {
-    return localStorage.getItem("shevdevworks-language") === "ru" ? "ru" : "en";
+    const stored = localStorage.getItem("shevdevworks-language");
+    return isLang(stored) ? stored : "en";
   } catch {
     return "en";
   }
@@ -349,10 +355,8 @@ export default function Experience() {
   const workGrid = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const c = content[lang];
-  const contactBody = lang === "en"
-    ? `Hi Ivan,\n\nI’m looking for: ${c.serviceOptions[briefService]}\n\n${briefMessage.trim()}\n`
-    : `Здравствуйте, Иван!\n\nМне нужно: ${c.serviceOptions[briefService]}\n\n${briefMessage.trim()}\n`;
-  const emailDraftUrl = `mailto:${email}?subject=${encodeURIComponent(lang === "en" ? "Project inquiry — ShevDevWorks" : "Новый проект — ShevDevWorks")}&body=${encodeURIComponent(contactBody)}`;
+  const contactBody = `${c.mailGreeting}\n\n${c.mailNeed} ${c.serviceOptions[briefService]}\n\n${briefMessage.trim()}\n`;
+  const emailDraftUrl = `mailto:${email}?subject=${encodeURIComponent(c.mailSubject)}&body=${encodeURIComponent(contactBody)}`;
   const telegramDraftUrl = `https://t.me/shevdevworks?text=${encodeURIComponent(contactBody)}`;
   const shownProjects = projects.filter(
     (p) => filter === 0 || p.group === [null, "apps", "websites", "bots"][filter],
@@ -373,14 +377,8 @@ export default function Experience() {
 
   useEffect(() => {
     document.documentElement.lang = lang;
-    document.title =
-      lang === "en"
-        ? "ShevDevWorks — Your idea. Beautifully built."
-        : "ShevDevWorks — Ваша идея. Готовый продукт.";
-    const description =
-      lang === "en"
-        ? "Websites, booking interfaces, storefronts, dashboards and Telegram bots. Independent developer in Kyiv. Find a solution for your business and discuss your project."
-        : "Сайты, интерфейсы бронирования, магазины, дашборды и Telegram-боты. Независимый разработчик в Киеве. Подберите решение для бизнеса и обсудим вашу задачу.";
+    document.title = content[lang].pageTitle;
+    const description = content[lang].pageDescription;
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute("content", description);
@@ -396,8 +394,8 @@ export default function Experience() {
       /* The selected language still works without storage. */
     }
     const url = new URL(window.location.href);
-    if (lang === "ru") url.searchParams.set("lang", "ru");
-    else url.searchParams.delete("lang");
+    if (lang === "en") url.searchParams.delete("lang");
+    else url.searchParams.set("lang", lang);
     history.replaceState(null, "", url);
     setCopyState("idle");
     setContactChannel(null);
@@ -462,13 +460,7 @@ export default function Experience() {
   function prepareContact(event: ReactMouseEvent<HTMLAnchorElement>, channel: "email" | "telegram") {
     const request = briefMessage.trim();
     const input = event.currentTarget.closest("form")!.elements.namedItem("message") as HTMLTextAreaElement;
-    input.setCustomValidity(
-      request
-        ? ""
-        : lang === "en"
-          ? "Add a short description of your project."
-          : "Добавьте короткое описание проекта.",
-    );
+    input.setCustomValidity(request ? "" : c.messageRequired);
     if (!request) {
       event.preventDefault();
       setContactChannel(null);
@@ -489,9 +481,7 @@ export default function Experience() {
           <Brand />
           <nav
             className="desktop-nav"
-            aria-label={
-              lang === "en" ? "Main navigation" : "Основная навигация"
-            }
+            aria-label={c.navLabel}
           >
             {["work", "services", "about"].map((id, i) => (
               <a href={`#${id}`} key={id}>
@@ -503,16 +493,16 @@ export default function Experience() {
             <div
               className="language-switch"
               role="group"
-              aria-label={lang === "en" ? "Language" : "Язык"}
+              aria-label={c.languageLabel}
             >
-              {(["en", "ru"] as Lang[]).map((l) => (
+              {languages.map((l) => (
                 <button
                   key={l}
                   lang={l}
                   aria-pressed={lang === l}
                   onClick={() => setLang(l)}
                 >
-                  {l.toUpperCase()}
+                  {languageLabels[l]}
                 </button>
               ))}
             </div>
@@ -538,9 +528,7 @@ export default function Experience() {
         <nav
           className={`mobile-nav ${menuOpen ? "is-open" : ""}`}
           id="mobile-nav"
-          aria-label={
-            lang === "en" ? "Mobile navigation" : "Мобильная навигация"
-          }
+          aria-label={c.mobileNavLabel}
           inert={!menuOpen}
         >
           {["work", "services", "about", "contact"].map((id, i) => (
@@ -628,7 +616,7 @@ export default function Experience() {
             <div
               className="work-filter"
               role="group"
-              aria-label={lang === "en" ? "Filter solutions" : "Фильтр решений"}
+              aria-label={c.filterLabel}
             >
               {c.filters.map((label, i) => (
                 <button

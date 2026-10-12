@@ -2067,22 +2067,22 @@ h1 {
   }
 }
 
-html[lang="ru"] h1 {
+html:is([lang="ru"], [lang="uk"]) h1 {
   font-size: clamp(56px, 6.6vw, 96px);
   letter-spacing: -0.06em;
 }
-html[lang="ru"] .headline-mark {
+html:is([lang="ru"], [lang="uk"]) .headline-mark {
   width: 0.38em;
   height: 0.42em;
   margin-left: 0.08em;
 }
-html[lang="ru"] .hero-lead {
+html:is([lang="ru"], [lang="uk"]) .hero-lead {
   grid-template-columns: minmax(0, 1fr) 305px;
 }
-html[lang="ru"] .service h3 button {
+html:is([lang="ru"], [lang="uk"]) .service h3 button {
   font-size: 19px;
 }
-html[lang="ru"] .project-switch button {
+html:is([lang="ru"], [lang="uk"]) .project-switch button {
   font-size: 11px;
 }
 @media (min-width: 1600px) {
@@ -2184,10 +2184,10 @@ html[lang="ru"] .project-switch button {
   .brief-form {
     padding: 30px;
   }
-  html[lang="ru"] h1 {
+  html:is([lang="ru"], [lang="uk"]) h1 {
     font-size: 72px;
   }
-  html[lang="ru"] .hero-lead {
+  html:is([lang="ru"], [lang="uk"]) .hero-lead {
     grid-template-columns: minmax(0, 1fr) 270px;
   }
 }
@@ -2397,13 +2397,13 @@ html[lang="ru"] .project-switch button {
   .contact-bottom {
     margin-top: 55px;
   }
-  html[lang="ru"] h1 {
+  html:is([lang="ru"], [lang="uk"]) h1 {
     font-size: min(62px, calc((100cqw - 265px) / 8.3));
   }
-  html[lang="ru"] .hero-lead {
+  html:is([lang="ru"], [lang="uk"]) .hero-lead {
     grid-template-columns: 1fr 240px;
   }
-  html[lang="ru"] .service h3 button {
+  html:is([lang="ru"], [lang="uk"]) .service h3 button {
     font-size: 16px;
   }
 }
@@ -2742,10 +2742,10 @@ html[lang="ru"] .project-switch button {
   .footer > span {
     font-size: 11px;
   }
-  html[lang="ru"] h1 {
+  html:is([lang="ru"], [lang="uk"]) h1 {
     font-size: min(78px, calc(100cqw / 8.3));
   }
-  html[lang="ru"] .hero-lead {
+  html:is([lang="ru"], [lang="uk"]) .hero-lead {
     grid-template-columns: 1fr;
   }
 }
@@ -3510,20 +3510,20 @@ html[lang="ru"] .project-switch button {
   .case-bottom .text-link {
     font-size: 12px;
   }
-  html[lang="ru"] h1 {
+  html:is([lang="ru"], [lang="uk"]) h1 {
     font-size: min(clamp(37px, 9.7vw, 58px), calc(100cqw / 8.45));
     letter-spacing: -0.06em;
   }
-  html[lang="ru"] .hero-intro .button {
+  html:is([lang="ru"], [lang="uk"]) .hero-intro .button {
     font-size: 11px;
   }
-  html[lang="ru"] .project-switch button {
+  html:is([lang="ru"], [lang="uk"]) .project-switch button {
     font-size: 11px;
   }
-  html[lang="ru"] .service h3 button {
+  html:is([lang="ru"], [lang="uk"]) .service h3 button {
     font-size: 17px;
   }
-  html[lang="ru"] .contact-copy h2 {
+  html:is([lang="ru"], [lang="uk"]) .contact-copy h2 {
     font-size: 54px;
   }
 }
@@ -3623,14 +3623,14 @@ html[lang="ru"] .project-switch button {
   .contact-bottom > span {
     max-width: 210px;
   }
-  html[lang="ru"] .hero-intro .button {
+  html:is([lang="ru"], [lang="uk"]) .hero-intro .button {
     font-size: 11px;
     gap: 12px;
   }
-  html[lang="ru"] .project-switch button {
+  html:is([lang="ru"], [lang="uk"]) .project-switch button {
     font-size: 11px;
   }
-  html[lang="ru"] .contact-copy h2 {
+  html:is([lang="ru"], [lang="uk"]) .contact-copy h2 {
     font-size: 48px;
   }
 }
