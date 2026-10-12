@@ -6,6 +6,7 @@ import {
   type FormEvent,
 } from "react";
 import { Brand, BrandSymbol, Icon } from "./components";
+import { BotIllustration } from "./BotIllustration";
 import { content, projects, type Lang, type Project } from "./content";
 import {
   pointerDepth,
@@ -24,14 +25,21 @@ const interfaceImages: Record<string, string> = {
   trendify: "trendify-interface.webp",
 };
 const shot = (project: Project) => assets + interfaceImages[project.id];
-const serviceProjects = [3, 0, 2, 4];
-const toolMarks = [
-  <Icon name="atom" size={27} />,
-  "TS",
-  "JS",
-  "</>",
-  "GS",
-  <Icon name="bolt" size={24} />,
+const serviceProjects = [3, 0, 2, 4, 5];
+const examples = projects.filter((project) => project.live);
+const toolkit = [
+  { name: "React", icon: "atom" },
+  { name: "Next.js", mark: "N" },
+  { name: "TypeScript", mark: "TS" },
+  { name: "JavaScript", mark: "JS" },
+  { name: "HTML & CSS", mark: "</>" },
+  { name: "Tailwind CSS", mark: "TW" },
+  { name: "GSAP", mark: "GS" },
+  { name: "Node.js", mark: "JS" },
+  { name: "PostgreSQL", mark: "PG" },
+  { name: "Telegram Bot API", icon: "telegram" },
+  { name: "Figma", mark: "Fi" },
+  { name: "Vite", icon: "bolt" },
 ];
 
 function initialLanguage(): Lang {
@@ -48,11 +56,13 @@ function CaseDialog({
   project,
   lang,
   onClose,
+  onRequest,
   reduced,
 }: {
   project: Project | null;
   lang: Lang;
   onClose: () => void;
+  onRequest: (project: Project) => void;
   reduced: boolean;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
@@ -131,51 +141,52 @@ function CaseDialog({
             </button>
           </div>
           <div className="case-heading">
-            <h2 id="case-title">{project.name}</h2>
+            <h2 id="case-title">{project.title[lang]}</h2>
             <p>{project.summary[lang]}</p>
-            <div className="tech-tags">
-              {project.stack.map((item) => (
-                <span key={item}>{item}</span>
-              ))}
-            </div>
+            <button className="button button-primary case-request" onClick={() => onRequest(project)}>
+              {c.similar}<Icon name="arrow" size={18} />
+            </button>
           </div>
           <div className={`case-image-wrap surface-${project.id}`}>
-            <img
+            {project.id === "telegram" ? <BotIllustration lang={lang} /> : <img
               className="case-image"
               src={shot(project)}
               alt={`${project.name} — ${project.category[lang]}`}
-            />
+            />}
           </div>
           <div className="case-body">
             <div>
               <h3>{c.brief}</h3>
               <p>{project.brief[lang]}</p>
+            </div>
+            <aside>
               <h3>{c.implementation}</h3>
               <ul>
                 {project.implementation.map((item, i) => (
-                  <li key={i}>
-                    <Icon name="check" size={18} />
-                    <span>{item[lang]}</span>
-                  </li>
+                  <li key={i}><Icon name="check" size={18} /><span>{item[lang]}</span></li>
                 ))}
               </ul>
-            </div>
-            <aside>
-              <h3>{c.scope}</h3>
-              <p>{project.scope[lang]}</p>
             </aside>
           </div>
+          <div className="case-example-note">
+            <strong>{project.live ? `${c.example}: ${project.name}` : c.illustration}</strong>
+            <p>{project.scope[lang]}</p>
+            <div className="tech-tags">{project.stack.map((item) => <span key={item}>{item}</span>)}</div>
+          </div>
           <div className="case-bottom">
-            <a
-              className="button button-primary"
+            <button className="button button-primary" onClick={() => onRequest(project)}>
+              {c.similar}<Icon name="arrow" size={18} />
+            </button>
+            {project.live && <a
+              className="text-link"
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
             >
               <span>{c.live}</span>
               <Icon name="external" />
-            </a>
-            <a
+            </a>}
+            {project.repo && <a
               className="text-link"
               href={project.repo}
               target="_blank"
@@ -183,14 +194,7 @@ function CaseDialog({
             >
               {c.code}
               <Icon name="external" size={16} />
-            </a>
-            <a
-              className="case-contact text-link"
-              href={`mailto:${email}?subject=${encodeURIComponent(`${project.name} — ${lang === "en" ? "project inquiry" : "новый проект"}`)}`}
-            >
-              {c.similar}
-              <Icon name="arrow" size={17} />
-            </a>
+            </a>}
           </div>
         </div>
       )}
@@ -210,7 +214,7 @@ function Theatre({
   onOpen: (project: Project) => void;
 }) {
   const c = content[lang];
-  const project = projects[featured];
+  const project = examples[featured];
   return (
     <div className="project-theatre">
       <div
@@ -261,7 +265,7 @@ function Theatre({
                     stroke="currentColor"
                   />
                 </svg>
-                {new URL(project.live).hostname}
+                {new URL(project.live!).hostname}
               </span>
               <Icon name="external" size={14} />
             </div>
@@ -312,7 +316,7 @@ function Theatre({
           role="group"
           aria-label={c.projectSelect}
         >
-          {projects.map((p, i) => (
+          {examples.map((p, i) => (
             <button
               key={p.id}
               aria-pressed={featured === i}
@@ -346,11 +350,21 @@ export default function Experience() {
   const reduced = useReducedMotion();
   const c = content[lang];
   const shownProjects = projects.filter(
-    (p) => filter === 0 || (filter === 2 ? p.id === "apex" : p.id !== "apex"),
+    (p) => filter === 0 || p.group === [null, "apps", "websites", "bots"][filter],
   );
   const serviceProject = projects[serviceProjects[service]];
   usePageMotion(reduced);
   const closeCase = useCallback(() => setSelected(null), []);
+  const requestEnquiry = (enquiry: number) => {
+    setSelected(null);
+    setBriefService(enquiry);
+    setDraftReady(false);
+    requestAnimationFrame(() => {
+      document.getElementById("contact")?.scrollIntoView({ behavior: reduced ? "instant" : "smooth" });
+      document.getElementById("message")?.focus({ preventScroll: true });
+    });
+  };
+  const requestService = (project: Project) => requestEnquiry(project.enquiry);
 
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -360,8 +374,8 @@ export default function Experience() {
         : "ShevDevWorks — Ваша идея. Готовый продукт.";
     const description =
       lang === "en"
-        ? "Independent frontend developer in Kyiv. Websites, React interfaces and e-commerce frontends, crafted with care. Explore the work and discuss your project."
-        : "Frontend-разработчик в Киеве. Сайты, React-приложения и интерфейсы магазинов с вниманием к деталям. Посмотрите работы и расскажите о своём проекте.";
+        ? "Websites, booking interfaces, storefronts, dashboards and Telegram bots. Independent developer in Kyiv. Find a solution for your business and discuss your project."
+        : "Сайты, интерфейсы бронирования, магазины, дашборды и Telegram-боты. Независимый разработчик в Киеве. Подберите решение для бизнеса и обсудим вашу задачу.";
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute("content", description);
@@ -592,24 +606,20 @@ export default function Experience() {
         </section>
 
         <div className="tool-strip container">
-          <span>{c.techNote}</span>
-          <div>
-            {[
-              "React",
-              "TypeScript",
-              "JavaScript",
-              "HTML & CSS",
-              "GSAP",
-              "Vite",
-            ].map((tool, i) => (
-              <span key={tool}>
-                <span className="tool-mark" aria-hidden="true">
-                  {toolMarks[i]}
+          <span id="toolkit-label">{c.techNote}</span>
+          <ul className="tool-list" aria-labelledby="toolkit-label" role="list">
+            {toolkit.map((tool) => (
+              <li key={tool.name}>
+                <span
+                  className={`tool-mark${tool.icon ? " tool-mark-icon" : ""}`}
+                  aria-hidden="true"
+                >
+                  {tool.icon ? <Icon name={tool.icon} size={25} /> : tool.mark}
                 </span>
-                {tool}
-              </span>
+                <span>{tool.name}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
         <section
@@ -629,7 +639,7 @@ export default function Experience() {
             <div
               className="work-filter"
               role="group"
-              aria-label={lang === "en" ? "Filter projects" : "Фильтр проектов"}
+              aria-label={lang === "en" ? "Filter solutions" : "Фильтр решений"}
             >
               {c.filters.map((label, i) => (
                 <button
@@ -648,7 +658,7 @@ export default function Experience() {
           >
             {shownProjects.map((p, i) => (
               <article
-                className={`project project-${p.id} ${(filter === 0 && i === 0) || shownProjects.length === 1 ? "project-featured" : ""}`}
+                className={`project project-${p.id} ${(filter === 0 && (i === 0 || p.id === "telegram")) || shownProjects.length === 1 ? "project-featured" : ""}`}
                 key={p.id}
               >
                 <button
@@ -656,20 +666,20 @@ export default function Experience() {
                   onClick={() => setSelected(p)}
                   onPointerMove={pointerDepth}
                   onPointerLeave={resetDepth}
-                  aria-label={`${c.case}: ${p.name}`}
+                  aria-label={`${c.case}: ${p.title[lang]}`}
                 >
                   <span className="project-visual-label">
                     {p.name}
-                    <span>{p.category[lang]}</span>
+                    <span>{p.live ? c.example : c.illustration}</span>
                   </span>
                   <div className="project-browser">
-                    <img
+                    {p.id === "telegram" ? <BotIllustration lang={lang} /> : <img
                       src={shot(p)}
                       alt={`${p.name} — ${p.category[lang]}`}
                       loading="lazy"
                       width="1440"
                       height="1000"
-                    />
+                    />}
                   </div>
                   {p.id === "stayline" && (
                     <div className="project-phone" aria-hidden="true">
@@ -689,15 +699,15 @@ export default function Experience() {
                   <div className="project-title-row">
                     <h3>
                       <button onClick={() => setSelected(p)}>
-                        {p.name}
+                        {p.title[lang]}
                         <Icon name="open" size={22} />
                       </button>
                     </h3>
                   </div>
                   <p>{p.summary[lang]}</p>
                   <div className="project-stack">
-                    {p.stack.map((s) => (
-                      <span key={s}>{s}</span>
+                    {p.benefits.map((s) => (
+                      <span key={s.en}>{s[lang]}</span>
                     ))}
                   </div>
                 </div>
@@ -753,10 +763,10 @@ export default function Experience() {
                       <div>
                         <p>{item.text}</p>
                         <span className="service-tools">{item.tags}</span>
-                        <a className="text-link" href="#contact">
+                        <button className="text-link service-enquiry" onClick={() => requestEnquiry(i === 3 ? 6 : projects[serviceProjects[i]].enquiry)}>
                           {c.talk}
                           <Icon name="arrow" size={18} />
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </article>
@@ -771,11 +781,11 @@ export default function Experience() {
                     {serviceProject.category[lang]}
                   </span>
                   <div className="service-preview-screen">
-                    <img
+                    {serviceProject.id === "telegram" ? <BotIllustration lang={lang} /> : <img
                       src={shot(serviceProject)}
                       alt={`${serviceProject.name} — ${serviceProject.category[lang]}`}
                       loading="lazy"
-                    />
+                    />}
                   </div>
                   <button
                     className="service-preview-link"
@@ -783,7 +793,7 @@ export default function Experience() {
                   >
                     <span>
                       <small>{c.serviceLink}</small>
-                      <strong>{serviceProject.name}</strong>
+                      <strong>{serviceProject.title[lang]}</strong>
                     </span>
                     <Icon name="open" size={25} />
                   </button>
@@ -988,6 +998,7 @@ export default function Experience() {
         project={selected}
         lang={lang}
         onClose={closeCase}
+        onRequest={requestService}
         reduced={reduced}
       />
     </>
