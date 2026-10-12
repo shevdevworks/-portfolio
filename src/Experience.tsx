@@ -5,7 +5,7 @@ import {
   useState,
   type FormEvent,
 } from "react";
-import { Brand, Icon, Spark } from "./components";
+import { Brand, BrandSymbol, Icon } from "./components";
 import { content, projects, type Lang, type Project } from "./content";
 import {
   pointerDepth,
@@ -223,9 +223,7 @@ function Theatre({
         <div className="stage-orbit orbit-two" aria-hidden="true" />
         <div className="stage-top">
           <span>
-            <span className="stage-star" aria-hidden="true">
-              <Spark />
-            </span> {c.previewNote}
+            <BrandSymbol className="stage-mark mark-join" /> {c.previewNote}
           </span>
           <span>{c.workCount}</span>
         </div>
@@ -565,9 +563,7 @@ export default function Experience() {
                   <span data-intro>
                     {line}
                     {i === 1 && (
-                      <span className="headline-spark" aria-hidden="true">
-                        <Spark />
-                      </span>
+                      <BrandSymbol className="headline-mark mark-join" />
                     )}
                   </span>
                 </span>

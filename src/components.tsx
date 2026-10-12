@@ -90,19 +90,14 @@ export function Icon({ name, size = 20 }: { name: string; size?: number }) {
   );
 }
 
-export function Spark() {
+/** The S is two mirrored halves, so each one can be animated on its own. */
+export function BrandSymbol({ className }: { className: string }) {
   return (
-    <svg
-      width="1em"
-      height="1em"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.2"
-      strokeLinecap="round"
-      aria-hidden="true"
-    >
-      <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4" />
+    <svg className={className} viewBox="-365 -403 730 806" aria-hidden="true">
+      <g fill="currentColor">
+        <path d="M148.18,-231.18L229.27,-312.27A18,18 0 0 0 216.54,-343H-81.36A45,45 0 0 0 -113.18,-329.82L-287.57,-155.43A60,60 0 0 0 -287.57,-70.57L-138.18,78.82A45,45 0 0 0 -106.36,92H-3.46A18,18 0 0 0 9.27,61.27L-117.57,-65.57A60,60 0 0 1 -117.57,-150.43L-63.18,-204.82A45,45 0 0 1 -31.36,-218H116.36A45,45 0 0 0 148.18,-231.18Z" />
+        <path d="M-148.18,231.18L-229.27,312.27A18,18 0 0 0 -216.54,343H81.36A45,45 0 0 0 113.18,329.82L287.57,155.43A60,60 0 0 0 287.57,70.57L138.18,-78.82A45,45 0 0 0 106.36,-92H3.46A18,18 0 0 0 -9.27,-61.27L117.57,65.57A60,60 0 0 1 117.57,150.43L63.18,204.82A45,45 0 0 1 31.36,218H-116.36A45,45 0 0 0 -148.18,231.18Z" />
+      </g>
     </svg>
   );
 }
@@ -114,16 +109,7 @@ export function Brand({ footer = false }: { footer?: boolean }) {
       href="#top"
       aria-label="ShevDevWorks"
     >
-      <svg
-        className="brand-symbol"
-        viewBox="-365 -403 730 806"
-        aria-hidden="true"
-      >
-        <g fill="currentColor">
-          <path d="M148.18,-231.18L229.27,-312.27A18,18 0 0 0 216.54,-343H-81.36A45,45 0 0 0 -113.18,-329.82L-287.57,-155.43A60,60 0 0 0 -287.57,-70.57L-138.18,78.82A45,45 0 0 0 -106.36,92H-3.46A18,18 0 0 0 9.27,61.27L-117.57,-65.57A60,60 0 0 1 -117.57,-150.43L-63.18,-204.82A45,45 0 0 1 -31.36,-218H116.36A45,45 0 0 0 148.18,-231.18Z" />
-          <path d="M-148.18,231.18L-229.27,312.27A18,18 0 0 0 -216.54,343H81.36A45,45 0 0 0 113.18,329.82L287.57,155.43A60,60 0 0 0 287.57,70.57L138.18,-78.82A45,45 0 0 0 106.36,-92H3.46A18,18 0 0 0 -9.27,-61.27L117.57,65.57A60,60 0 0 1 117.57,150.43L63.18,204.82A45,45 0 0 1 31.36,218H-116.36A45,45 0 0 0 -148.18,231.18Z" />
-        </g>
-      </svg>
+      <BrandSymbol className="brand-symbol" />
       <span>
         ShevDevWorks<span className="brand-dot">.</span>
       </span>

@@ -325,7 +325,9 @@ h2 {
   background: #698c74;
   box-shadow: 0 0 0 4px #e7ede8;
 }
+/* A size container, so narrow layouts can fit the headline and its mark on one line. */
 .hero-lead {
+  container-type: inline-size;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 295px;
   align-items: end;
@@ -346,16 +348,31 @@ h1 {
 .headline-mask > span {
   display: block;
 }
-.headline-spark {
+.headline-mark {
   display: inline-block;
-  font-size: 0.48em;
-  line-height: 0;
-  margin-left: 0.24em;
-  color: var(--accent);
+  width: 0.435em;
+  height: 0.48em;
+  margin-left: 0.14em;
   vertical-align: middle;
   position: relative;
-  top: -0.13em;
-  animation: spark-turn 1.8s var(--ease) 0.7s both;
+  top: -0.06em;
+}
+/* The two halves of the S slide along their shared diagonal, lock together,
+   then the finished mark makes one full turn. */
+.mark-join {
+  --mark-delay: 0.75s;
+  overflow: visible;
+  animation: mark-spin 1s cubic-bezier(0.65, 0, 0.25, 1)
+    calc(var(--mark-delay) + 1s);
+}
+.mark-join path {
+  animation: mark-join 1.1s cubic-bezier(0.6, 0, 0.2, 1) var(--mark-delay) both;
+}
+.mark-join path:last-child {
+  --mark-from: 260px;
+}
+.stage-mark {
+  --mark-delay: 1.05s;
 }
 .hero-intro {
   padding-bottom: 5px;
@@ -494,10 +511,9 @@ h1 {
   align-items: center;
   gap: 10px;
 }
-.stage-star {
-  font-size: 20px;
-  color: #c0b1ff;
-  line-height: 1;
+.stage-mark {
+  width: 16px;
+  height: 18px;
 }
 .stage-composition {
   position: absolute;
@@ -1956,14 +1972,22 @@ h1 {
   margin-left: auto;
 }
 
-@keyframes spark-turn {
+/* Opacity lands early so the halves are visible while they are still travelling. */
+@keyframes mark-join {
   from {
-    transform: rotate(-110deg) scale(0.3);
+    transform: translate(var(--mark-from, -260px), var(--mark-from, -260px));
     opacity: 0;
   }
-  to {
-    transform: rotate(0) scale(1);
+  35% {
     opacity: 1;
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}
+@keyframes mark-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 @keyframes screen-change {
@@ -2011,9 +2035,10 @@ html[lang="ru"] h1 {
   font-size: clamp(56px, 6.6vw, 96px);
   letter-spacing: -0.06em;
 }
-html[lang="ru"] .headline-spark {
-  font-size: 0.4em;
-  margin-left: 0.13em;
+html[lang="ru"] .headline-mark {
+  width: 0.38em;
+  height: 0.42em;
+  margin-left: 0.08em;
 }
 html[lang="ru"] .hero-lead {
   grid-template-columns: minmax(0, 1fr) 305px;
@@ -2156,10 +2181,7 @@ html[lang="ru"] .project-switch button {
     grid-template-columns: 1fr 240px;
   }
   h1 {
-    font-size: 68px;
-  }
-  .headline-spark {
-    display: none;
+    font-size: min(68px, calc((100cqw - 265px) / 7.4));
   }
   .hero-intro > p {
     font-size: 12px;
@@ -2342,7 +2364,7 @@ html[lang="ru"] .project-switch button {
     margin-top: 55px;
   }
   html[lang="ru"] h1 {
-    font-size: 62px;
+    font-size: min(62px, calc((100cqw - 265px) / 8.3));
   }
   html[lang="ru"] .hero-lead {
     grid-template-columns: 1fr 240px;
@@ -2361,7 +2383,7 @@ html[lang="ru"] .project-switch button {
     padding-bottom: 36px;
   }
   h1 {
-    font-size: 84px;
+    font-size: min(84px, calc(100cqw / 7.4));
   }
   .hero-intro {
     display: grid;
@@ -2688,7 +2710,7 @@ html[lang="ru"] .project-switch button {
     font-size: 11px;
   }
   html[lang="ru"] h1 {
-    font-size: 78px;
+    font-size: min(78px, calc(100cqw / 8.3));
   }
   html[lang="ru"] .hero-lead {
     grid-template-columns: 1fr;
@@ -2814,12 +2836,9 @@ html[lang="ru"] .project-switch button {
     padding-bottom: 33px;
   }
   h1 {
-    font-size: clamp(40px, 10.6vw, 63px);
+    font-size: min(clamp(40px, 10.6vw, 63px), calc(100cqw / 7.65));
     letter-spacing: -0.06em;
     line-height: 1.09;
-  }
-  .headline-spark {
-    display: none;
   }
   .hero-intro {
     display: block;
@@ -2862,8 +2881,9 @@ html[lang="ru"] .project-switch button {
   .stage-top > span:first-child {
     gap: 7px;
   }
-  .stage-star {
-    font-size: 17px;
+  .stage-mark {
+    width: 14px;
+    height: 16px;
   }
   .stage-composition {
     inset: 63px 0 60px;
@@ -3461,7 +3481,7 @@ html[lang="ru"] .project-switch button {
     font-size: 12px;
   }
   html[lang="ru"] h1 {
-    font-size: clamp(37px, 9.7vw, 58px);
+    font-size: min(clamp(37px, 9.7vw, 58px), calc(100cqw / 8.45));
     letter-spacing: -0.06em;
   }
   html[lang="ru"] .hero-intro .button {
