@@ -916,7 +916,7 @@ h1 {
 .showcase-phone img {
   width: 100%;
   height: auto;
-  aspect-ratio: 0.5;
+  aspect-ratio: auto;
   object-fit: cover;
   object-position: top;
 }
@@ -1267,7 +1267,7 @@ h1 {
 .project-browser img {
   width: 100%;
   height: auto;
-  aspect-ratio: 1.44;
+  aspect-ratio: auto;
   object-fit: cover;
   object-position: top;
   transition: transform 0.8s var(--ease);
@@ -1316,7 +1316,7 @@ h1 {
 }
 .project-featured .project-phone img {
   width: 100%;
-  aspect-ratio: 0.5;
+  aspect-ratio: auto;
   object-fit: cover;
   object-position: top;
 }
@@ -1598,7 +1598,7 @@ h1 {
 }
 .service-preview-screen img {
   width: 100%;
-  aspect-ratio: 1.56;
+  aspect-ratio: auto;
   object-fit: cover;
   object-position: top;
 }

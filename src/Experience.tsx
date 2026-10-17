@@ -18,14 +18,37 @@ import {
 
 const assets = `${import.meta.env.BASE_URL}images/`;
 const email = "shevdevworks@gmail.com";
-const interfaceImages: Record<string, string> = {
-  stayline: "stayline-interface.webp",
-  emquad: "emquad-interface.webp",
-  cybergear: "cyber-gear-interface.webp",
-  apex: "apex-saas-interface.webp",
-  trendify: "trendify-interface.webp",
+const imageVersion = "692a35413f";
+const interfaceImages: Record<string, { file: string; width: number; height: number }> = {
+  "stayline": {
+    "file": "stayline-interface.webp",
+    "width": 1440,
+    "height": 940
+  },
+  "emquad": {
+    "file": "emquad-interface.webp",
+    "width": 1440,
+    "height": 1000
+  },
+  "cybergear": {
+    "file": "cyber-gear-interface.webp",
+    "width": 1440,
+    "height": 900
+  },
+  "apex": {
+    "file": "apex-saas-interface.webp",
+    "width": 1440,
+    "height": 820
+  },
+  "trendify": {
+    "file": "trendify-interface.webp",
+    "width": 1440,
+    "height": 1100
+  }
 };
-const shot = (project: Project) => assets + interfaceImages[project.id];
+const shot = (project: Project) =>
+  `${assets}${interfaceImages[project.id].file}?v=${imageVersion}`;
+const staylineMobile = `${assets}stayline-mobile.webp?v=${imageVersion}`;
 const serviceProjects = [3, 0, 2, 4, 5];
 const examples = projects.filter((project) => project.live);
 const toolkit = [
@@ -300,7 +323,7 @@ function Theatre({
           {featured === 0 ? (
             <div className="showcase-phone" aria-hidden="true">
               <div className="phone-speaker" />
-              <img src={assets + "stayline-mobile.webp"} alt="" />
+              <img src={staylineMobile} alt="" />
             </div>
           ) : (
             <div className="stage-project-note" key={project.id}>
@@ -733,14 +756,14 @@ export default function Experience() {
                       src={shot(p)}
                       alt={`${p.name} — ${p.category[lang]}`}
                       loading="lazy"
-                      width="1440"
-                      height="1000"
+                      width={interfaceImages[p.id].width}
+                      height={interfaceImages[p.id].height}
                     />}
                   </div>
                   {p.id === "stayline" && (
                     <div className="project-phone" aria-hidden="true">
                       <img
-                        src={assets + "stayline-mobile.webp"}
+                        src={staylineMobile}
                         alt=""
                         loading="lazy"
                       />
